@@ -11,8 +11,8 @@ export default function App() {
     
     <View style={{flex:1,backgroundColor:'#495E57'}}>
       <LittleLemonHeader/>
-      {/* <WelcomeScreen/> */}
-      <MenuItems/>
+      <WelcomeScreen/>
+      {/* <MenuItems/> */}
     </View>
     
     <View>
