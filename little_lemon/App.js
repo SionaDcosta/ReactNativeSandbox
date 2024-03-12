@@ -7,6 +7,7 @@ import MenuItems from './components/MenuItems';
 import MenuItems_FlatList from './components/MenuItems_FlatList';
 import MenuItems_SectionList from './components/MenuItems_SectionList';
 import TextInputForm from './components/TextInputForm';
+import LoginScreen from './components/LoginScreen';
 
 export default function App() {
   return (
@@ -16,7 +17,8 @@ export default function App() {
       {/* <MenuItems /> */}
       {/* <MenuItems_FlatList/> */}
       {/* <MenuItems_SectionList/> */}
-      <TextInputForm/>
+      {/* <TextInputForm/> */}
+      <LoginScreen/>
     </View>
     <View>
       <LittleLemonFooter/>
@@ -25,10 +27,18 @@ export default function App() {
   );
 }
 
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#495E57',
+//   },
+// });
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#495E57',
+    backgroundColor: '#333333',
   },
+  footerContainer: { backgroundColor: '#333333' },
 });
 
