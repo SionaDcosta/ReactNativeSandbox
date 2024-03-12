@@ -5,6 +5,7 @@ const TextInputForm=()=>{
     const [firstName, onChangeFirstName] =useState('');
     const [lastName, onChangeLastName] =useState('');
     const [message, onChangeMessage] =useState('');
+    const [phoneNumber, onChangePhoneNumber] = useState('');
 
     return(
         <ScrollView style={styles.container}>
@@ -28,11 +29,20 @@ const TextInputForm=()=>{
                 onChangeText={onChangeLastName}
                 placeholder={'Last Name'}
             />
+            <TextInput 
+   style={styles.input} 
+   value={phoneNumber} 
+   onChangeText={onChangePhoneNumber} 
+   placeholder={'Phone Number'} 
+   keyboardType={"phone-pad"} 
+ />
             <TextInput
                 style={styles.messageInput}
                 value={message}
                 onChangeText={onChangeMessage}
                 placeholder={'Enter your Feedback'}
+                multiline={true}
+                maxLength={250}
             />
         </ScrollView>
     );
