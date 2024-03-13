@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, Pressable } from 'react-native';
 
-export default function WelcomeScreen() {
+export default function WelcomeScreen({navigation}) {
   return (
     <ScrollView indicatorStyle={"white"} style={{ flex: 1, backgroundColor:'grey' }}>
       <Text
@@ -25,6 +25,9 @@ export default function WelcomeScreen() {
         and classic cocktails in a lively but casual environment. We would love
         to hear more about your experience with us!
       </Text>
+      <Pressable onPress={() => navigation.navigate('Menu')}>
+        <Text style={{fontSize: 20}}>View Menu</Text>
+      </Pressable>
     </ScrollView>
   );
 }
