@@ -9,6 +9,8 @@ import MenuItems_SectionList from './components/MenuItems_SectionList';
 import TextInputForm from './components/TextInputForm';
 import LoginScreen from './components/LoginScreen';
 import ViewMenu from './components/ViewMenu';
+import ColorScheme from './components/ColorScheme';
+import WindowDimensions from './components/WindowDimensions';
 
 export default function App() {
   return (
@@ -20,8 +22,9 @@ export default function App() {
       {/* <MenuItems_SectionList/> */}
       {/* <TextInputForm/> */}
       {/* <LoginScreen/> */}
-      
-      <ViewMenu/>
+      {/* <ViewMenu/> */}
+      {/* <ColorScheme/> */}
+      <WindowDimensions/>
     </View>
     <View>
       <LittleLemonFooter/>
@@ -40,7 +43,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#333333',
+    // backgroundColor: '#333333',
   },
   footerContainer: { backgroundColor: '#333333' },
 });
