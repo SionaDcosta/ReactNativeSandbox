@@ -12,6 +12,9 @@ import ViewMenu from './components/ViewMenu';
 import ColorScheme from './components/ColorScheme';
 import WindowDimensions from './components/WindowDimensions';
 
+
+
+
 export default function App() {
   return (
     <>
