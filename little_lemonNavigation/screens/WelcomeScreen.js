@@ -26,7 +26,7 @@ export default function WelcomeScreen({navigation}) {
         to hear more about your experience with us!
       </Text>
       <Pressable onPress={() => navigation.navigate('Menu')}>
-        <Text style={{fontSize: 20}}>View Menu</Text>
+        <Text style={{fontSize: 40, textAlign:'center'}}>View Menu</Text>
       </Pressable>
     </ScrollView>
   );
