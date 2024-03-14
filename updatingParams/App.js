@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button, View, Text } from 'react-native';
+import { Button, View, Text,Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -93,13 +93,30 @@ function SettingsScreen({ navigation, route }) {
   );
 }
 
+function LogoTitle() {
+  return (
+    <Image
+      style={{ width: 50, height: 50 }}
+      source={{ uri: 'https://www.48hourslogo.com/oss/works/2022/01/13/21255711641/115168_45900_fc8ca08f-43ca-45b0-9147-3c86b3eb880a.jpg' }}
+    />
+  );
+}
+
 const Stack = createNativeStackNavigator();
 
 function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Home" component={HomeScreen} 
+          options={{headerTitle: (props) => <LogoTitle {...props}/>,
+          headerRight: () => (
+            <Button
+              onPress={() => alert('This is a button!')}
+              title="Info"
+              color="#00cc00"
+            />
+          ),}}/>
         <Stack.Screen
           name="Profile"
           component={ProfileScreen}
