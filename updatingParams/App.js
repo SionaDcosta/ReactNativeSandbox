@@ -4,8 +4,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 function HomeScreen({ navigation: { navigate } }) {
+ 
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      {/* <Text>Count:{count}</Text> */}
+      
       <Text>This is the home screen of the app</Text>
       <Button
         onPress={() =>
@@ -19,7 +22,17 @@ function HomeScreen({ navigation: { navigate } }) {
     </View>
   );
 }
-
+function UpdateCount({navigation}){
+  const [count, setCount] = React.useState(0);
+  React.useEffect(() => {
+    navigation.setOptions({
+    headerRight: () => (
+      <Button onPress={() => setCount((c) => c + 1)} title="Update count" />
+    ),
+  });
+}, [navigation, setCount]);
+return <Text>Count: {count}</Text>;
+}
 function ProfileScreen({ navigation, route }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -96,7 +109,7 @@ function SettingsScreen({ navigation, route }) {
 function LogoTitle() {
   return (
     <Image
-      style={{ width: 50, height: 50 }}
+      style={{ width: 50, height: 50,}}
       source={{ uri: 'https://www.48hourslogo.com/oss/works/2022/01/13/21255711641/115168_45900_fc8ca08f-43ca-45b0-9147-3c86b3eb880a.jpg' }}
     />
   );
@@ -111,18 +124,26 @@ function App() {
         <Stack.Screen name="Home" component={HomeScreen} 
           options={{headerTitle: (props) => <LogoTitle {...props}/>,
           headerRight: () => (
+            <>
             <Button
               onPress={() => alert('This is a button!')}
               title="Info"
               color="#00cc00"
             />
+            <Button title="Update count" /></>
           ),}}/>
         <Stack.Screen
           name="Profile"
           component={ProfileScreen}
-          options={({ route }) => ({ title: route.params.title })}
+          options={({ route }) => ({ title: route.params.title, })}
+
         />
-        <Stack.Screen name="Settings" component={SettingsScreen} />
+        <Stack.Screen name="Settings" component={SettingsScreen} 
+        options={{
+          headerBackTitle: 'Custom Back',
+          headerBackTitleStyle: { fontSize: 30 },
+        }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
