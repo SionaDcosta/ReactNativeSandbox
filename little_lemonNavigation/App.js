@@ -11,12 +11,18 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Welcome" 
-      screenOptions={{ headerStyle: { backgroundColor: "#FBDABB"}}}>
+      screenOptions={{ 
+        headerStyle: { backgroundColor: "#FBDABB"},
+        headerTintColor: '#a87732',
+        
+        headerTitleStyle:{
+          fontWeight: 'bold'
+        }
+        }}>
       <Stack.Screen 
-      options={{title:'Home'}}
-      
       name="Welcome" 
-      component={WelcomeScreen} />
+      component={WelcomeScreen}
+      options={{title:'Home'}} />
         {/* <Stack.Screen name="Welcome" component={WelcomeScreen} /> */}
         <Stack.Screen 
         
