@@ -43,7 +43,51 @@ function ProfileScreen({ navigation, route }) {
         }
         title="Swap title and friends"
       />
+      <Button
+        title="Replace this screen with Settings"
+        onPress={() =>
+          navigation.replace('Settings', {
+            someParam: 'Param',
+          })
+        }
+      />
+      <Button
+        title="Reset navigator state to Settings"
+        onPress={() =>
+          navigation.reset({
+            index: 0,
+            routes: [
+              {
+                name: 'Settings',
+                params: { someParam: 'Param1' },
+              },
+            ],
+          })
+        }
+      />
+      <Button
+        title="Go to Settings"
+        onPress={() => navigation.navigate('Settings', { someParam: 'Param1' })}
+      />
       <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+function SettingsScreen({ navigation, route }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Settings screen</Text>
+      <Text>{route.params.someParam}</Text>
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <Button
+        onPress={() =>
+          navigation.navigate('Profile', {
+            friends: ['Brent', 'Satya', 'Michaś'],
+          })
+        }
+        title="Go to Brent's profile"
+      />
     </View>
   );
 }
@@ -60,6 +104,7 @@ function App() {
           component={ProfileScreen}
           options={({ route }) => ({ title: route.params.title })}
         />
+        <Stack.Screen name="Settings" component={SettingsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
