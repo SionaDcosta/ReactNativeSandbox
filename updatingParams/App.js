@@ -79,7 +79,7 @@ function SettingsScreen({ navigation, route }) {
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Settings screen</Text>
       <Text>{route.params.someParam}</Text>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      
       <Button
         onPress={() =>
           navigation.navigate('Profile', {
@@ -88,6 +88,7 @@ function SettingsScreen({ navigation, route }) {
         }
         title="Go to Brent's profile"
       />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
     </View>
   );
 }
