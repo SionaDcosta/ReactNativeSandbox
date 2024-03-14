@@ -13,7 +13,7 @@ export default function App() {
     <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
+        tabBarIcon: ({ focused, color, size }) => {//React Navigation internally manages the state of the tab navigation, including which tab is currently focused
           let iconName;
 
           if (route.name === 'Welcome') {
