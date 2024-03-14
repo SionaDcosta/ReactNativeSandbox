@@ -1,12 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MenuScreen from './screens/MenuScreen';
+import WelcomeScreen from './screens/WelcomeScreen';
+import { Ionicons } from '@expo/vector-icons';
+
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+
+          if (route.name === 'Welcome') {
+            iconName = focused
+              ? 'home'
+              : 'home-outline';
+          } else if (route.name === 'Menu') {
+            iconName =  focused ? 'menu' : 'menu-outline';
+          }
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: 'blue',
+        tabBarInactiveTintColor: 'gray',
+      })} >
+     <Tab.Screen name="Welcome" component={WelcomeScreen} />
+      <Tab.Screen name="Menu" component={MenuScreen} />
+    </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
