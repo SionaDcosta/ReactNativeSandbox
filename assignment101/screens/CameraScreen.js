@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Camera, CameraType } from 'expo-camera';
-import { View, Text, Button, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, Button, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 const CameraScreen = ({ navigation }) => {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
+  const [capturedImage, setCapturedImage] = useState(null);
+  const cameraRef = useRef(null);
 
   useEffect(() => {
     if (permission && permission.granted) {
@@ -31,15 +33,24 @@ const CameraScreen = ({ navigation }) => {
     setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
   }
 
+  const takePicture = async () => {
+    if (cameraRef.current) {
+      const { uri } = await cameraRef.current.takePictureAsync();
+      setCapturedImage(uri);
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Camera style={styles.camera} type={type}>
+      <Camera style={styles.camera} type={type} ref={cameraRef}>
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
             <Text style={styles.text}>Flip Camera</Text>
           </TouchableOpacity>
         </View>
       </Camera>
+      {capturedImage && <Image source={{ uri: capturedImage }} style={styles.imagePreview} />}
+      <Button title="Take Picture" onPress={takePicture} />
       <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
     </View>
   );
@@ -66,6 +77,12 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     color: 'white',
+  },
+  imagePreview: {
+    width: 200,
+    height: 200,
+    alignSelf: 'center',
+    marginVertical: 20,
   },
 });
 
