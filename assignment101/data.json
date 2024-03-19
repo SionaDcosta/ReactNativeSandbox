@@ -1,0 +1,30 @@
+{
+    "cities": [
+      {
+        "name": "Zurich",
+        "population": 434008,
+        "area_km2": 87.88
+      },
+      {
+        "name": "Geneva",
+        "population": 201818,
+        "area_km2": 15.93
+      },
+      {
+        "name": "Basel",
+        "population": 178388,
+        "area_km2": 23.91
+      },
+      {
+        "name": "Lausanne",
+        "population": 138905,
+        "area_km2": 41.38
+      },
+      {
+        "name": "Bern",
+        "population": 133115,
+        "area_km2": 51.6
+      }
+    ]
+  }
+  
