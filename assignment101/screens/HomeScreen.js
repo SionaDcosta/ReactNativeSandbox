@@ -4,22 +4,15 @@ import { View, Text, StyleSheet, ImageBackground, ScrollView, Image } from 'reac
 const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      {/* Background Image */}
+      
       <ImageBackground
-        source={require('../assets/bgImg.jpg')} // Local background image
+        source={require('../assets/bgImg.jpg')}
         style={styles.background}
         resizeMode="cover"
       >
-        {/* Scrolling Banner */}
+        
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.banner}>
-            {/* Zurich , Mount Rigi Kulm, Lake Lucerne, Rapperswil, Ticino*/}
-          {/* <Image source={{ uri: 'https://www.travelandleisure.com/thmb/WCN9Giwyi4aywN3L1rgg5KOett0=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/TAL-zurich-PLACESSWITZERLAND1023-ed230e232ec74442a8cd7710c84c8f85.jpg' }} style={styles.bannerImage} />
-          <Image source={{ uri: 'https://www.travelandleisure.com/thmb/bV87CClaUelDvCpaCq5UOyvmfYQ=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/TAL-mount-rigi-kulm-PLACESSWITZERLAND1023-f8eb41864cf044079ba11c5bd20f8ad8.jpg' }} style={styles.bannerImage} />
-          <Image source={{ uri: 'https://www.travelandleisure.com/thmb/e1L2UymgJQVpxzLzTZ_o6TGt_UI=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/TAL-lucerne-PLACESSWITZERLAND1023-b40787768bd1443d8660a47fdfc3c029.jpg' }} style={styles.bannerImage} />
-          <Image source={{ uri: 'https://www.travelandleisure.com/thmb/7NNwJ9wqM6vKV4a5oAv1hkhHdic=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/TAL-rapperswil-PLACESSWITZERLAND1023-2c6545759ecf4ee592f78cafd71de69b.jpg' }} style={styles.bannerImage} />
-          <Image source={{ uri: 'https://www.travelandleisure.com/thmb/dCtG_YnchvvX2kVpJQ9KeASh0ms=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/TAL-ticino-PLACESSWITZERLAND1023-ef63ca17ca314ab9b76fd55258d165a9.jpg' }} style={styles.bannerImage} />
-         */}
-         
+          
          <View style={styles.imageContainer}>
     <Image source={{ uri: 'https://www.travelandleisure.com/thmb/WCN9Giwyi4aywN3L1rgg5KOett0=/750x0/filters:no_upscale():max_bytes(150000):strip_icc():format(webp)/TAL-zurich-PLACESSWITZERLAND1023-ed230e232ec74442a8cd7710c84c8f85.jpg' }} style={styles.bannerImage} />
     <Text style={styles.imageText}>Zurich</Text>
@@ -42,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
   </View>
          </ScrollView>
         
-        {/* Other content */}
+       
         <Text style={styles.text}>Welcome to Switzerland!</Text>
       </ImageBackground>
     </View>

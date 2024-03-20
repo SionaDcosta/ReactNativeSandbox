@@ -4,8 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import FooterNavigation from './navigation/FooterNavigation';
 import Header from './components/Header';
 import { StatusBar } from 'expo-status-bar';
-import PostList from './components/PostList';
-import ListNavigation from './navigation/ListNavigation';
 
 
 const App = () => {

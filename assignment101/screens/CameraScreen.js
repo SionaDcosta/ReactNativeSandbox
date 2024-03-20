@@ -10,7 +10,7 @@ const CameraScreen = ({ navigation }) => {
 
   useEffect(() => {
     if (permission && permission.granted) {
-      // Permission granted, do any additional setup here if needed
+      // Permission granted
     }
   }, [permission]);
 

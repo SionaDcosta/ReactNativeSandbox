@@ -1,54 +1,37 @@
-// import { View, Text } from 'react-native';
-// import React from 'react';
-// import PostList from '../components/PostList';
-// import ReadAndSaveButton from '../components/ReadAndSaveButton';
-// import DisplayFileContent from '../components/DisplayFileContent';
- 
-// export default function ListScreen() {
-//   return <View>
-//     <ReadAndSaveButton/>
-//     <DisplayFileContent/>
-//     <PostList/>
-//     </View>
-// }
-
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import * as MediaLibrary from 'expo-media-library';
 import * as FileSystem from 'expo-file-system';
 import Header from '../components/Header';
 import PostList from '../components/PostList';
- 
+
 const ListScreen = () => {
   const [jsonData, setJsonData] = useState(null);
- 
+
   const handleReadData = () => {
     try {
       const data = require('../data.json');
-     // console.log('Data:', data);
       setJsonData(data);
     } catch (error) {
       console.error('Error reading data.json file:', error.message);
     }
   };
- 
+
   const handleDownload = async () => {
     try {
-      const fileUri = FileSystem.documentDirectory + 'data.json';
-   
-      // await FileSystem.downloadAsync(
-      //   '../data/data.json', // Replace with your file URL
-      //   fileUri
-      // );
-      console.log('File downloaded to:', fileUri);
-      
+      const data = require('../data.json'); // Load the data again
+      const documentsDirectory = FileSystem.documentDirectory + 'Documents/';
+      const fileUri = documentsDirectory + 'data.json';
+  
+      await FileSystem.makeDirectoryAsync(documentsDirectory, { intermediates: true });
+      await FileSystem.writeAsStringAsync(fileUri, JSON.stringify(data));
+  
+      console.log('Data downloaded to:', fileUri);
     } catch (error) {
-      console.error('Error downloading file:', error.message);
+      console.error('Error downloading data:', error.message);
     }
   };
- 
- 
+
   return (
     <View style={styles.container}>
       <StatusBar />
@@ -68,12 +51,11 @@ const ListScreen = () => {
             <Text style={styles.dataText}>{JSON.stringify(jsonData, null, 2)}</Text>
           </View>
         )}
-       </ScrollView>
-     
+      </ScrollView>
     </View>
   );
 };
- 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -109,5 +91,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
- 
+
 export default ListScreen;
