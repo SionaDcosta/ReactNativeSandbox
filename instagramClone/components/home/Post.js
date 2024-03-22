@@ -18,7 +18,7 @@ const PostHeader=({post})=>(
         margin:5,
         alignItems:'center'
     }}>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', alignItems:'center'}}>
             <Image source={{uri: post.profile_picture }} style={styles.story}/>
             <Text style={{marginLeft:5, fontWeight:'700'}}>{post.user}</Text>
         </View>
