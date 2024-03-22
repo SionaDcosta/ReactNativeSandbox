@@ -18,9 +18,9 @@ const PostHeader=({post})=>(
         margin:5,
         alignItems:'center'
     }}>
-        <View>
+        <View style={{flexDirection: 'row'}}>
             <Image source={{uri: post.profile_picture }} style={styles.story}/>
-            <Text></Text>
+            <Text style={{marginLeft:5, fontWeight:'700'}}>{post.user}</Text>
         </View>
     </View>
 )
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         height: 35,
         borderRadius: 50,
         marginLeft: 6,
-        borderWidth: 3,
+        borderWidth: 1.6,
         borderColor: '#ff8501',
     }
 })
