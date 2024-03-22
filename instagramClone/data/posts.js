@@ -2,7 +2,7 @@ import { Users } from "./Users";
 
 export const Posts = [
     {
-        imageUrl: 'https://plus.unsplash.com/premium_photo-1688497831081-836510928186?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bW9kZWxzfGVufDB8fDB8fHww',
+        imageUrl: 'https://images.unsplash.com/photo-1508610048659-a06b669e3321?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGZsb3dlcnN8ZW58MHx8MHx8fDA%3D',
         user: Users[0].user,
         likes: 15,
         caption : 'FirstPost',
@@ -19,7 +19,7 @@ export const Posts = [
         ]
     },
     {
-        imageUrl: 'https://plus.unsplash.com/premium_photo-1688497831081-836510928186?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bW9kZWxzfGVufDB8fDB8fHww',
+        imageUrl: 'https://plus.unsplash.com/premium_photo-1675919640620-067b83eeb38b?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zmxvd2Vyc3xlbnwwfHwwfHx8MA%3D%3D',
         user: Users[1].user,
         likes: 15,
         caption : 'SecondPost',
@@ -36,7 +36,7 @@ export const Posts = [
         ]
     },
     {
-        imageUrl: 'https://plus.unsplash.com/premium_photo-1688497831081-836510928186?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bW9kZWxzfGVufDB8fDB8fHww',
+        imageUrl: 'https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Zmxvd2Vyc3xlbnwwfHwwfHx8MA%3D%3D',
         user: Users[2].user,
         likes: 15,
         caption : 'ThirdPost',
@@ -53,7 +53,7 @@ export const Posts = [
         ]
     },
     {
-        imageUrl: 'https://plus.unsplash.com/premium_photo-1688497831081-836510928186?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bW9kZWxzfGVufDB8fDB8fHww',
+        imageUrl: 'https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Zmxvd2Vyc3xlbnwwfHwwfHx8MA%3D%3D',
         user: Users[3].user,
         likes: 15,
         caption : 'FourthPost',
@@ -70,7 +70,7 @@ export const Posts = [
         ]
     },
     {
-        imageUrl: 'https://plus.unsplash.com/premium_photo-1688497831081-836510928186?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bW9kZWxzfGVufDB8fDB8fHww',
+        imageUrl: 'https://images.unsplash.com/photo-1468327768560-75b778cbb551?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGZsb3dlcnN8ZW58MHx8MHx8fDA%3D',
         user: Users[4].user,
         likes: 15,
         caption : 'FifthPost',
@@ -87,7 +87,7 @@ export const Posts = [
         ]
     },
     {
-        imageUrl: 'https://plus.unsplash.com/premium_photo-1688497831081-836510928186?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bW9kZWxzfGVufDB8fDB8fHww',
+        imageUrl: 'https://plus.unsplash.com/premium_photo-1676475964992-6404b8db0b53?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGZsb3dlcnN8ZW58MHx8MHx8fDA%3D',
         user: Users[5].user,
         likes: 15,
         caption : 'SixthPost',
@@ -104,7 +104,7 @@ export const Posts = [
         ]
     },
     {
-        imageUrl: 'https://plus.unsplash.com/premium_photo-1688497831081-836510928186?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bW9kZWxzfGVufDB8fDB8fHww',
+        imageUrl: 'https://images.unsplash.com/photo-1561848355-890d054dc55a?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjJ8fGZsb3dlcnN8ZW58MHx8MHx8fDA%3D',
         user: Users[6].user,
         likes: 15,
         caption : 'SeventhPost',
