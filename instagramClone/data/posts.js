@@ -14,7 +14,7 @@ export const Posts = [
             },
             {
                 user: 'glen',
-                comment: 'Wow'
+                comment: 'GitHub Copilot is a better solution than ChatGPT for most coding and programming use cases.'
             }
         ]
     },
@@ -22,7 +22,7 @@ export const Posts = [
         imageUrl: 'https://plus.unsplash.com/premium_photo-1675919640620-067b83eeb38b?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zmxvd2Vyc3xlbnwwfHwwfHx8MA%3D%3D',
         user: Users[1].user,
         likes: 15,
-        caption : 'SecondPost',
+        caption : 'Get AI-based suggestions in real time. GitHub Copilot suggests code completions as developers type and turns natural language prompts into coding suggestions',
         profile_picture: Users[1].image,
         comments : [
             {
