@@ -1,6 +1,6 @@
 import { View, Text, ScrollView, Image, StyleSheet } from 'react-native'
 import React from 'react'
-import { Users } from '../data/Users';
+import { Users } from '../../data/Users';
 const Stories = () => {
   return (
     <View style={{marginBottom: 13}}>
