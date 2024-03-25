@@ -19,13 +19,18 @@ const isValidUri = (url) => {
       return false;
     }
   };
-const FormikPostUploader = () => {
+const FormikPostUploader = ({navigation}) => {
 
     const [thumbnailUrl, setThumbnailUrl] = useState(placeholderImg);
   return (
    <Formik
    initialValues = {{caption:'', imageUrl:''}}
-        onSubmit={(values) => console.log(values) }
+        onSubmit={(values) => {
+            console.log(values) 
+            console.log('Your post was submitted successfully')
+            navigation.goBack()
+        }
+            }
         validationSchema={uploadPostSchema}
         validateOnMount={true} //because the share button was enabled when page loaded, 
     >
