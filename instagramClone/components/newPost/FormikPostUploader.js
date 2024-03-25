@@ -10,6 +10,15 @@ const uploadPostSchema = Yup.object().shape({
     imageUrl: Yup.string().url().required('A URL is required'),
     caption: Yup.string().max(2200,'Caption has reached the character limit')
 })
+
+const isValidUri = (url) => {
+    try {
+      new URL(url);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  };
 const FormikPostUploader = () => {
 
     const [thumbnailUrl, setThumbnailUrl] = useState(placeholderImg);
@@ -23,8 +32,11 @@ const FormikPostUploader = () => {
        {({handleBlur, handleChange, handleSubmit, values, errors, isValid}) =>(
         <>
         <View style={{margin: 20, justifyContent:'space-between', flexDirection:'row'}}>
-            <Image source={thumbnailUrl? {uri:thumbnailUrl}: placeholderImg}  //made it dynamic and before source was:source={thumbnailUrl? thumbnailUrl: placeholderImg (i added {uri:} to render img properly)
-            style={{width:100, height:100}}/>
+        <Image
+  source={isValidUri(thumbnailUrl) ? { uri: thumbnailUrl } : placeholderImg}
+  style={{ width: 100, height: 100 }}
+/>
+            
         <View style={{flex:1, marginLeft:12 }}>
         <TextInput
             style={{fontSize:20}}
