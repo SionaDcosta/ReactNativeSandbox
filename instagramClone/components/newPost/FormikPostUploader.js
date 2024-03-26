@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import * as Yup from 'yup';
 import {Formik} from 'formik';
 import { Button, Divider } from 'react-native-elements'
+import validUrl from 'valid-url'
 
 const placeholderImg = require('../../assets/defaultPlaceholder_NewPost.png');
 
@@ -38,6 +39,12 @@ const FormikPostUploader = ({navigation}) => {
         <>
         <View style={{margin: 20, justifyContent:'space-between', flexDirection:'row'}}>
         <Image
+            // ERROR  TypeError: uri.match is not a function (it is undefined)
+            // source={{
+            //     uri:validUrl.isUri(thumbnailUrl)
+            //     ? thumbnailUrl
+            //     : placeholderImg
+            // }}
   source={isValidUri(thumbnailUrl) ? { uri: thumbnailUrl } : placeholderImg}
   style={{ width: 100, height: 100 }}
 />
