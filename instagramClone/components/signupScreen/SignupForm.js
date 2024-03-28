@@ -1,147 +1,65 @@
-import { View, Text, StyleSheet, TextInput, Pressable, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { Formik } from 'formik'
-import * as Yup from 'yup'
-import Validator from 'email-validator'
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import { signInWithEmailAndPassword } from '@firebase/auth';
 
-const SignupForm = ({navigation}) => {
-    const SignupFormSchema = Yup.object().shape({
-        email: Yup.string().email().required('An email is required'),
-        username: Yup.string().required().min(2,'A username is required'),
-        password: Yup.string().required().min(6,'Your password has to have at least 6 characters')
-    })
+const SignupForm = ({ navigation }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSignup = async () => {
+    try {
+      await signInWithEmailAndPassword(email, password);
+      // Navigate to the HomeScreen after successful signup
+      navigation.navigate('HomeScreen');
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    }
+  };
+
   return (
-    <View style={styles.wrapper}>
-        <Formik
-            initialValues={{email:'', username:'', password:''}}
-            onSubmit={values => {
-                console.log(values)
-            }}
-            validationSchema={SignupFormSchema}
-            validateOnMount={true}
-        >
-            {({handleChange, handleBlur, handleSubmit, values, isValid})=>(
-
-            <>
-            {/* converting the style prop into an array so that styles can be applied dynamically accoring to my need */}
-        <View style={[
-            styles.inputField,
-            {
-                borderColor:
-                values.email.length < 1 || Validator.validate(values.email)
-                ?'#ccc'
-                :'red',
-            }
-            ]}>
-            <TextInput
-                placeholderTextColor='#444'
-                placeholder='Phone number, username or email'
-                autoCapitalize='none'
-                keyboardType='email-address'
-                textContentType='emailAddress'
-                autoFocus={true}
-                onChangeText={handleChange('email')}
-                onBlur={handleBlur('email')}
-                value={values.email}
-            />
-            
-        </View>
-
-        <View style={[
-            styles.inputField,
-            {
-                borderColor:
-                1 > values.username.length || values.username.length >= 2
-                ?'#ccc'
-                :'red',
-            }
-            ]}
-            >
-            <TextInput
-                placeholderTextColor='#444'
-                placeholder='Username'
-                autoCapitalize='none'
-                textContentType='username'
-                onChangeText={handleChange('username')}
-                onBlur={handleBlur('username')}
-                value={values.username}
-            />
-            
-        </View>
-        <View style={[
-            styles.inputField,
-            {
-                borderColor:
-                1 > values.password.length || values.password.length >= 6
-                ?'#ccc'
-                :'red',
-            }
-            ]}>
-            <TextInput
-                placeholderTextColor='#444'
-                placeholder='Password'
-                autoCapitalize='none'
-                autoCorrect={false}
-                secureTextEntry={true}
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
-                value={values.password}
-            />
-            
-        </View>
-       
-      <Pressable 
-      titleSize={20} 
-      style={styles.button(isValid)} //disabled comes automatically with formik
-      onPress={handleSubmit}
-      >
-        <Text style={styles.buttonText}> Sign Up</Text>
-      </Pressable>
-
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+      <Button title="Signup" onPress={handleSignup} />
       <View style={styles.loginContainer}>
-        <Text> Already have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={{color:'#6BB0F5'}}> Log In</Text>
-        </TouchableOpacity>
+        <Text>Already have an account?</Text>
+        <Button title="Log In" onPress={() => navigation.navigate('Login')} />
       </View>
-      </>
-      )}
-      </Formik>
-      
-      
     </View>
-  )
-}
-
+  );
+};
 
 const styles = StyleSheet.create({
-    wrapper:{
-        marginTop: 80,
-    },
-    inputField:{
-        borderRadius: 4,
-        padding: 12,
-        backgroundColor: '#FAFAFA',
-        marginBottom: 10,
-        borderWidth:1,
-    },
-    button: (isValid) => ({
-        backgroundColor: isValid?'#0096F6':'#9ACAF7',
-        alignItems:'center',
-        justifyContent:'center',
-        minHeight: 42,
-        borderRadius: 4,
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
+  input: {
+    width: '100%',
+    marginBottom: 20,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+  },
+  loginContainer: {
+    flexDirection: 'row',
+    marginTop: 20,
+    alignItems: 'center',
+  },
+});
 
-    }),
-    buttonText:{
-        fontWeight:'600',
-        fontSize: 18,
-    },
-    loginContainer:{
-        flexDirection: 'row',
-        width:'100%',
-        justifyContent:'center',
-        marginTop: 50
-    }
-})
 export default SignupForm;
