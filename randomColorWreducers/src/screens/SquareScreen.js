@@ -12,13 +12,26 @@ const reducer = (state, action) =>{
 
   switch(action.colorToChange){
     case 'red':
-      return { ...state, red: state.red + action.amount };
+      // if (state.red + action.amount > 255 || state.red + action.amount < 0){
+      //   return state;
+      // }
+      // return { ...state, red: state.red + action.amount };
+
+      return state.red + action.amount > 255 || state.red + action.amount < 0
+      ? state
+      : { ...state, red: state.red + action.amount };
       // made a copy of the state var i.e return {red:0, green:0, blue:0}, 
       //then took red and redefined it( added amt to it) in the RHS of the existing obj, red will now be verwritten with the new value . This way Org state var will not be changed
+    
     case 'green':
-      return { ...state, green: state.green + action.amount };
+      return state.green + action.amount > 255 || state.green + action.amount < 0
+      ? state
+      : { ...state, green: state.green + action.amount };
+      
     case 'blue':
-      return { ...state, blue: state.blue + action.amount };
+      return state.blue + action.amount > 255 || state.blue + action.amount < 0
+      ? state
+      : { ...state, blue: state.blue + action.amount };
     default:
       return state;
   }
