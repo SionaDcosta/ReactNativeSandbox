@@ -9,8 +9,7 @@ const reducer = (state, action) =>{
   //state === { red: number, green: number, blue: number}
   //action(i.e howToChangeState) === { colorToChange: 'red' || 'green' || 'blue', amount: 15 || -15 }
   //Comm Con: action=== { type: 'change_red' || 'change_green' || 'change_blue', payload: 15 || -15 }
-
-
+  
   // When we want to change the property inside our state ob, we are going to rebuild that entire state obj from scratch and that new obj will have the changed value of r/g/b that we want
 
   // switch(action.colorToChange){
