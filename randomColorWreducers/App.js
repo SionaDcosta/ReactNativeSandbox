@@ -10,6 +10,7 @@ import CounterScreen from "./src/screens/CounterScreen";
 import ColorScreen from "./src/screens/ColorScreen";
 import SquareScreen from "./src/screens/SquareScreen";
 import TextScreen from './src/screens/TextScreen';
+import BoxScreen from './src/screens/BoxScreen';
 
 const Stack = createStackNavigator();
 
@@ -63,6 +64,11 @@ const App = () => {
           name="Text"
           component={TextScreen}
           options={{ title: 'Text' }}
+        />
+        <Stack.Screen
+          name="Box"
+          component={BoxScreen}
+          options={{ title: 'Box' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
