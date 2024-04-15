@@ -4,7 +4,8 @@ import SearchBar from '../components/SearchBar';
 import useResults from '../hooks/useResults';
 import ResultsList from '../components/ResultsList';
 
-const SearchScreen = () => {
+const SearchScreen = ({navigation}) => {
+//const SearchScreen = () => {
     const [term,setTerm] = useState('');
     const [searchApi, results, errorMessage] = useResults();
 
@@ -37,9 +38,18 @@ const SearchScreen = () => {
       {errorMessage? <Text>{errorMessage}</Text>: null}
       {/* <Text>We have found {results.length} results</Text> */}
       <ScrollView>
-      <ResultsList title="Cost Effective" results={filterResultsByPrice('$')}/>
-      <ResultsList title="Bit Pricier" results={filterResultsByPrice('$$')}/>
-      <ResultsList title="Big Spender" results={filterResultsByPrice('$$$')}/> 
+      <ResultsList title="Cost Effective" 
+        results={filterResultsByPrice('$')} 
+        //navigation={navigation}
+    />
+      <ResultsList title="Bit Pricier" 
+        results={filterResultsByPrice('$$')} 
+        //navigation={navigation}
+        />
+      <ResultsList title="Big Spender" 
+      results={filterResultsByPrice('$$$')} 
+      //navigation={navigation} //When we add this the flow of how this prop is passed is: React Navigation>SearchScreen>ResultsList. BUt searchScr doesn't care about the navigation prop. so we directly pass navigation prop to the result screen
+      /> 
       </ScrollView>
       
       {/* Here we've displayed places with 1,2,3 dollar signs, there are also places with 4 dollar signs, but they will not be displayed since we did not mention. That's why the total will be different than what is actually displayed */}
