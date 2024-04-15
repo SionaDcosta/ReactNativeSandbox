@@ -1,30 +1,12 @@
 import { View, Text } from 'react-native'
-import React, {useState} from 'react'
-import SearchBar from '../components/SearchBar'
-import yelp from '../api/yelp';
+import React, {useState, useEffect} from 'react'
+import SearchBar from '../components/SearchBar';
+import useResults from '../hooks/useResults';
+
 
 const SearchScreen = () => {
     const [term,setTerm] = useState('');
-    const [results, setResults] = useState([]);
-    const [ errorMessage, setErrorMessage ] = useState('');
-
-    const searchApi= async() => {
-        try{
-            const response = await yelp.get('/search',{
-                params:{
-                    limit: 50, //search?limit=50
-                    //term:term //rhs is the "state var:- term", we can folow ES2015 syntax because key and value are identical, we can shotern it down to "term"
-                    term,
-                    location: 'san jose'
-                }
-            });
-            setResults(response.data.businesses);
-        }
-        catch(err){
-            setErrorMessage('Something went wrong.')
-        }
-    };
-
+    const [searchApi, results, errorMessage] = useResults();
   return (
     <View>
         <SearchBar 
@@ -32,7 +14,9 @@ const SearchScreen = () => {
         //onTermChange={(newTerm)=> setTerm(newTerm)}
         // onTermSubmit={ () => searchApi()} can shorten this to just pass the reference to the function we want to call. Do the same thing with setTerm as well
         onTermChange={setTerm}
-        onTermSubmit={searchApi}
+        // onTermSubmit={searchApi} removed these references to have some flow in execution
+        onTermSubmit={()=> searchApi(term)}
+
         />
       {errorMessage? <Text>{errorMessage}</Text>: null}
       <Text>We have found {results.length} results</Text>
