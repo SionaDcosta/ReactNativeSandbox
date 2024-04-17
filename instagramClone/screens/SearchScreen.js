@@ -18,12 +18,12 @@ const SearchScreen = ({route}) => {
     <View style={styles.container}>
       <TextInput
         style={styles.input}
-        placeholder="Search on YouTube"
+        placeholder="Type something..."
         value={searchQuery}
         onChangeText={setSearchQuery}
       />
       <Button
-        title="Search Videos on YouTube"
+        title="Search on YouTube"
         onPress={handleSearch}
       />
       
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   input: {
-    width: '80%',
+    width: '85%',
     height: 40,
     borderWidth: 1,
     borderColor: '#ccc',
