@@ -2,6 +2,7 @@ import { View, TouchableOpacity, Image, StyleSheet } from 'react-native'
 import React from 'react'
 import { useState } from 'react'
 import { Divider } from 'react-native-elements'
+import { useNavigation } from '@react-navigation/native';
 
 export const bottomTabsIcons = [
     {
@@ -15,9 +16,9 @@ export const bottomTabsIcons = [
         inactive:require('../../assets/hf_icons8-search.png')
     },
     {
-        name:'Reels',
-        active: require('../../assets/hf_icons8-reelsFilled.png'),
-        inactive:require('../../assets/hf_icons8-reels.png')
+        name:'Posts',
+        active: require('../../assets/hf_icons8-apiFilled.png'),
+        inactive:require('../../assets/hf_icons8-api.png')
     },
     {
         name:'Shop',
@@ -32,10 +33,11 @@ export const bottomTabsIcons = [
 ]
 
 
-const BottomTabs = ({icons}) => {
+const BottomTabs = ({icons, userInfo}) => {
+    const navigation = useNavigation();
     const [activeTab, setActiveTab] = useState('Home')
     const Icon = ({icon}) => (
-        <TouchableOpacity onPress={()=> setActiveTab(icon.name)}>
+        <TouchableOpacity onPress={() => handleTabPress(icon.name)}>
             <Image source={activeTab === icon.name? icon.active: icon.inactive} 
             style={[styles.icon, 
                     icon.name === 'Profile'? styles.profilePic(): null,
@@ -43,6 +45,40 @@ const BottomTabs = ({icons}) => {
                     styles.profilePic(activeTab)
                     :null,]}/>
         </TouchableOpacity>)
+
+
+const handleTabPress = (tabName) => {
+    setActiveTab(tabName);
+    if (tabName === 'Posts') {
+      navigation.navigate('PostsApi', { activeTab: tabName }); 
+    } else {
+      // Handle navigation for other tabs if needed
+      // For demonstration purposes, let's navigate to different screens based on tab names
+      switch (tabName) {
+        case 'Home':
+          navigation.navigate('HomeScreen');
+          break;
+        case 'Search':
+          navigation.navigate('SearchScreen', { activeTab: tabName });
+          break;
+        case 'Shop':
+          navigation.navigate('ShopScreen', { activeTab: tabName });
+          break;
+        case 'Profile':
+          navigation.navigate('ProfileScreen', { activeTab: tabName, userInfo: userInfo });
+          break;
+        default:
+          break;
+      }
+    }
+  };
+  
+// const handleTabPress = (tabName) => {
+//     setActiveTab(tabName);
+//     if (tabName === 'Reels') {
+//       navigation.navigate('AddPost'); 
+//     }
+//   };
     
   return (
     <View style={styles.wrapper}>

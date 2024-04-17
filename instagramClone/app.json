@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "blank",
-    "slug": "blank",
+    "name": "instaClone",
+    "slug": "instaClone",
     "version": "1.0.0",
     "platforms": [
       "ios",
