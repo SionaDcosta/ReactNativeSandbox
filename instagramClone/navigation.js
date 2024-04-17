@@ -26,7 +26,7 @@ const SignedInStack = () => (
             <Stack.Screen name='PostsApi' component={PostsApi}/>
             <Stack.Screen name='SearchScreen' component={SearchScreen}/>
             <Stack.Screen name='ShopScreen' component={ShopScreen}/>
-            {/* <Stack.Screen name='ProfileScreen' component={ProfileScreen}/> */}
+            <Stack.Screen name='ProfileScreen' component={ProfileScreen}/>
         </Stack.Navigator>
     </NavigationContainer>
 )

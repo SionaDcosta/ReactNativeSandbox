@@ -4,15 +4,17 @@ import { View, Text, TextInput, Button, Alert, StyleSheet, Pressable, TouchableO
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Validator from 'email-validator';
-
+import { useNavigation } from '@react-navigation/native';
 
 import { signInWithEmailAndPassword } from '@firebase/auth';
 import { auth } from './firebase';// Import auth object
+import  AsyncStorage  from '@react-native-async-storage/async-storage';
 
-const LoginForm = ({ navigation }) => {
+
+const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const navigation = useNavigation(); // Initialize navigation
 
   const LoginFormSchema = Yup.object().shape({
     email: Yup.string().email().required('An email is required'),
@@ -23,7 +25,15 @@ const LoginForm = ({ navigation }) => {
     try {
       await signInWithEmailAndPassword(auth, email, password); // Use auth object
       console.log("🔥 Firebase Login Successfull", email)
+
+      // Store userInfo in AsyncStorage
+      await AsyncStorage.setItem('userInfo', JSON.stringify({ email }));
       navigation.navigate('HomeScreen');
+// Set user information
+// const userInfo = { email }; // You can add more user information here
+// navigation.navigate('ProfileScreen', { userInfo }); 
+
+      
     } catch (error) {
       Alert.alert('Error', error.message);
     }

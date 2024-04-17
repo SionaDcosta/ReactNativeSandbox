@@ -1,29 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Linking } from 'react-native';
-import BottomTabs, {bottomTabsIcons} from '../components/home/BottomTabs';
+import { View, Text, StyleSheet } from 'react-native';
+import BottomTabs, { bottomTabsIcons } from '../components/home/BottomTabs';
+import  AsyncStorage from '@react-native-async-storage/async-storage';
 
-const ProfileScreen = ({ route }) => {
-    const { userInfo } = route.params;
-    return (
-      <SafeAreaView style={styles.safe}>
-        <View style={styles.container}>
-          {userInfo ? (
-            <>
-              <Text style={styles.userName}>{userInfo.username}</Text>
-              {console.log(userInfo.username)}
-              <Text style={styles.email}>{userInfo.email}</Text>
-            </>
-          ) : (
-            <Text style={styles.userName}>No user information available</Text>
-          )}
-        </View>
-        <BottomTabs icons={bottomTabsIcons} userInfo={userInfo} />
+const ProfileScreen = () => {
+  const [userInfo, setUserInfo] = useState(null);
 
-      </SafeAreaView>
-    );
-  };
-  
+  useEffect(() => {
+    // Retrieve userInfo from AsyncStorage when the component mounts
+    const fetchUserInfo = async () => {
+      try {
+        const storedUserInfo = await AsyncStorage.getItem('userInfo');
+        if (storedUserInfo) {
+          setUserInfo(JSON.parse(storedUserInfo));
+        }
+      } catch (error) {
+        console.error('Error retrieving user info:', error);
+      }
+    };
+
+    fetchUserInfo();
+  }, []);
+
+  return (
+    <SafeAreaView style={styles.safe}>
+      <View style={styles.container}>
+        {userInfo ? (
+          <Text style={styles.userName}>{userInfo.email}</Text>
+        ) : (
+          <Text style={styles.userName}>No user information available</Text>
+        )}
+      </View>
+      <BottomTabs icons={bottomTabsIcons} userInfo={userInfo} />
+    </SafeAreaView>
+  );
+};
+
+
+
+
+
 
 
 

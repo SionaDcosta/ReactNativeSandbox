@@ -1,19 +1,21 @@
 import { View, Text, StyleSheet, Image } from 'react-native'
-import React from 'react'
+// import React from 'react'
 import LoginForm from '../components/loginScreen/LoginForm'
-
+import React, { useState } from 'react';
 
 const instagramLogo= 'https://cdn.iconscout.com/icon/free/png-512/free-instagram-1868979-1583143.png?f=webp&w=512'
-const LoginScreen = ({navigation}) => (
+const LoginScreen = ({navigation}) => {
+    const [userInfo, setUserInfo] = useState(null);
+return (
     <View style={styles.container}>
         <View style={styles.logoContainer}>
             <Image source={{uri: instagramLogo, height:100, width: 100}}/>
             
         </View>
-        <LoginForm navigation={navigation}/>
+        <LoginForm navigation={navigation} setUser={setUserInfo} />
     </View>
   )
-
+}
 const styles = StyleSheet.create({
     container:{
         flex:1,
