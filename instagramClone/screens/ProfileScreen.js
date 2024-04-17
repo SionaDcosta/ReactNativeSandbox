@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, StatusBar, Image, TouchableOpacity } from 'react-native';
 import BottomTabs, { bottomTabsIcons } from '../components/home/BottomTabs';
 import  AsyncStorage from '@react-native-async-storage/async-storage';
+import { SimpleLineIcons, MaterialCommunityIcons } from "@expo/vector-icons";
 
 const ProfileScreen = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -23,64 +24,73 @@ const ProfileScreen = () => {
     fetchUserInfo();
   }, []);
 
+  
+
   return (
-    <SafeAreaView style={styles.safe}>
+    
+    <>
+    <View style={styles.container}>
       <View style={styles.container}>
+        <StatusBar />
+
+        <View style={{width: "100% "}}>
+          <Image 
+            source={require('../assets/profile_bgImg.jpg')}
+            style={styles.cover}
+          />
+        </View>
+        <View style={styles.profileContainer}>
+          <Image 
+            source={require('../assets/hf_icons8_profile.png')}
+            style={styles.profile}
+          />
+          
+        </View>
+        <View style={styles.userNameContainer}>
         {userInfo ? (
-          <Text style={styles.userName}>{userInfo.email}</Text>
+          <Text style={styles.userName}>{userInfo.email.split('@')[0]}</Text>
         ) : (
           <Text style={styles.userName}>No user information available</Text>
         )}
       </View>
-      <BottomTabs icons={bottomTabsIcons} userInfo={userInfo} />
-    </SafeAreaView>
+
+      <TouchableOpacity>
+        <View style={styles.menuItem(0.2)}>
+          <MaterialCommunityIcons
+          name="github"
+          size={24}
+          />
+          <Text style={styles.menuText}>Github</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <View style={styles.menuItem(0.2)}>
+          <MaterialCommunityIcons
+          name="locker"
+          size={24}
+          />
+          <Text style={styles.menuText}>Settings</Text>
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity>
+        <View style={styles.menuItem(0.2)}>
+          <MaterialCommunityIcons
+          name="logout"
+          size={24}
+          />
+          <Text style={styles.menuText}>Logout</Text>
+        </View>
+      </TouchableOpacity>
+      
+      <View style={styles.menuItem(0.2)}></View> 
+      {/* 0.2 */}
+      </View>
+      
+    </View>
+    <BottomTabs icons={bottomTabsIcons} />
+    </>
   );
 };
-
-
-
-
-
-
-
-
-// const ProfileScreen = ({ userInfo }) => {
-//     // Assuming the user's information is passed as a prop named 'userInfo'
-//     // const { userInfo } = route.params;
-
-//     // Function to handle opening the GitHub account link
-//     // const handleGitHubLinkPress = () => {
-//     //     Linking.openURL(userInfo.githubLink);
-//     // };
-//     // const user= userInfo.email;
-//     return (
-//         <SafeAreaView style={styles.safe} >
-//         <View style={styles.container}>
-//             {/* {console.log("17",userInfo)} */}
-//             {/* {console.log("Here:", user)} */}
-//             {/* Profile Picture */}
-//             {/* <Image
-//                 source={{ uri: userInfo.profilePicture }}
-//                 style={styles.profilePicture}
-//             /> */}
-
-//                 {userInfo ? ( // Check if userInfo is defined
-//                     <Text style={styles.userName}>{userInfo.email}</Text> // Display email if userInfo is defined
-//                 ) : (
-//                     <Text style={styles.userName}>No user information available</Text> // Handle case where userInfo is undefined
-//                 )}
-//             {/* User Name */}
-//             {/* <Text style={styles.userName}>{userInfo && userInfo.email}</Text>
-//             <Text style={styles.userName}>pink</Text> */}
-
-//             {/* GitHub Account Link */}
-//             {/* <TouchableOpacity onPress={handleGitHubLinkPress}>
-//                 <Text style={styles.githubLink}>{userInfo.githubLink}</Text>
-//             </TouchableOpacity> */}
-//         </View>
-//         </SafeAreaView>
-//     );
-// };
 
 const styles = StyleSheet.create({
     safe:{
@@ -89,27 +99,50 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
     
   },
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+  cover:{
+    height: 290,
+    width:"100%",
+    resizeMode:"cover"
+  },
+  profileContainer:{
+    flex:1,
+    alignItems:"center"
+  },
+  profile:{
+    height:155,
+    width:155,
+    borderRadius:999,
+    borderColor:"#2b2c36",
+    borderWidth: 2,
+    resizeMode: 'cover',
+    marginTop: -99,
+  },
+
+  userName: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      marginBottom: 10,
+      
     },
-    profilePicture: {
-        width: 120,
-        height: 120,
-        borderRadius: 60,
-        marginBottom: 20,
+
+    userNameContainer: {
+      marginTop: 60,
+      alignItems: 'center',
     },
-    userName: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        marginBottom: 10,
-    },
-    githubLink: {
-        fontSize: 18,
-        color: 'blue',
-        textDecorationLine: 'underline',
-    },
+  menuItem: (borderTopWidth) => ({
+    borderTopWidth: borderTopWidth,
+    flexDirection:'row',
+    paddingVertical: 25,
+    paddingHorizontal: 30,
+    borderColor: "black",
+  }),
+  menuText:{
+    marginLeft:20,
+    fontWeight:'600',
+    fontSize: 14,
+    lineHeight: 26,
+  }
+    
 });
 
 export default ProfileScreen;
