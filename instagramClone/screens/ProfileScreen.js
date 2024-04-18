@@ -87,6 +87,7 @@ const ProfileScreen = () => {
       </View>
       
     </View>
+    <Text style={styles.bottomText}>@meta</Text>
     <BottomTabs icons={bottomTabsIcons} />
     </>
   );
@@ -141,6 +142,13 @@ const styles = StyleSheet.create({
     fontWeight:'600',
     fontSize: 14,
     lineHeight: 26,
+  },
+  bottomText:{
+    marginLeft:170,
+    fontWeight:'600',
+    fontSize: 14,
+    marginTop:30
+    // lineHeight: 26,
   }
     
 });

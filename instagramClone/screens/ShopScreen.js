@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     height: '20%', // Adjust as needed
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#5c759e', // Adjust the background color
+    backgroundColor: '#93a0ab', // Adjust the background color
   },
   headerTitle: {
     fontSize: 24,
