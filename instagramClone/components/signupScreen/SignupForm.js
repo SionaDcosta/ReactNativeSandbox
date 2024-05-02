@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
 import { signInWithEmailAndPassword } from '@firebase/auth';
 
+
 const SignupForm = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -34,7 +35,7 @@ const SignupForm = ({ navigation }) => {
       <Button title="Signup" onPress={handleSignup} />
       <View style={styles.loginContainer}>
         <Text>Already have an account?</Text>
-        <Button title="Log In" onPress={() => navigation.navigate('Login')} />
+        <Button title="Log In" onPress={() => navigation.navigate('LoginScreen')} />
       </View>
     </View>
   );
@@ -42,13 +43,14 @@ const SignupForm = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 20,
+    //  flex: 1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // paddingHorizontal: 20,
+    marginTop: 40,
   },
   input: {
-    width: '100%',
+    // width: '100%',
     marginBottom: 20,
     padding: 10,
     borderWidth: 1,
