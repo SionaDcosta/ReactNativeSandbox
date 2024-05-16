@@ -7,7 +7,7 @@ import Detail from '../screens/Detail'
 const Stack = createStackNavigator();
 
 
-const Navigation = () => {
+const HomeStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Home" component={Home}/>
