@@ -128,7 +128,7 @@ const App = () => {
     >
       <View style={styles.slide}>
         <Image source={require("./images/img.jpg")} style={styles.img} />
-        <Text style={styles.title}>Meet Up UI-Kit</Text>
+        <Text style={styles.title}>UI - Kit</Text>
         <Text style={styles.text}>
         There’s something for every kind of seeker onboard Adventure of the Seas. You can get your adrenaline fix with a whip, 
         splashing ride on The Perfect Storm℠ twin racer slides.
@@ -144,7 +144,7 @@ const App = () => {
       </View>
 
       <View style={styles.slide}>
-        <Image source={require("./images/img3.png")} style={styles.img} />
+        <Image source={require("./images/img3.jpg")} style={styles.img} />
         <Text style={styles.title}>Get Started</Text>
         <Text style={styles.text}>
         There’s something for every kind of seeker onboard Adventure of the Seas. You can get your adrenaline fix with a whip, 
@@ -152,7 +152,7 @@ const App = () => {
         </Text>
       </View>
       <View style={styles.slide}>
-        <Image source={require("./images/img4.png")} style={styles.img} />
+        <Image source={require("./images/img4.jpg")} style={styles.img} />
         <Text style={styles.title}>Welcome</Text>
         <Text style={styles.text}>
         There’s something for every kind of seeker onboard Adventure of the Seas. You can get your adrenaline fix with a whip, 
