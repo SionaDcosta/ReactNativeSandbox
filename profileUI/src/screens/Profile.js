@@ -14,7 +14,7 @@ import { LinearGradient } from "expo-linear-gradient";
 const w = Dimensions.get("window").width;
 const h = Dimensions.get("window").height;
 
-const Profile = () => {
+const Profile = ({navigation }) => {
   return (
     <ScrollView style={{ backgroundColor: "#241332" }}>
       <ImageBackground
@@ -26,13 +26,14 @@ const Profile = () => {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent:"flex-end",
+            // justifyContent: "space-between",
             paddingEnd: 20,
             marginTop: 60,
             alignItems: "center",
           }}
         >
-          <Image source={require("../../assets/icons-back-light.png")} />
+          {/* <Image source={require("../../assets/icons-back-light.png")} /> */}
           <Image source={require("../../assets/filter.png")} />
         </View>
         <LinearGradient
@@ -89,7 +90,7 @@ const Profile = () => {
             FOLLOWERS
           </Text>
         </View>
-        <View style={{alignItems: "center",}}>
+        <View style={{ alignItems: "center" }}>
           <Text
             style={{
               fontSize: 30,
@@ -109,7 +110,7 @@ const Profile = () => {
             FOLLOWING
           </Text>
         </View>
-        <View style={{alignItems: "center",}}>
+        <View style={{ alignItems: "center" }}>
           <Text
             style={{
               fontSize: 30,
@@ -129,6 +130,206 @@ const Profile = () => {
             LIKES
           </Text>
         </View>
+      </View>
+
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          backgroundColor: "#352641",
+          marginTop: 30,
+          marginHorizontal: 10,
+          borderRadius: 60,
+          paddingHorizontal: 5,
+          paddingVertical: 5,
+        }}
+      >
+        <Text
+          style={{
+            fontSize: 16,
+            paddingLeft: 60,
+            fontFamily: "Montserrat_600SemiBold",
+            color: "#918998",
+          }}
+        >
+          POPULAR
+        </Text>
+        <View
+          style={{
+            backgroundColor: "#8A56AC",
+            paddingHorizontal: 50,
+            paddingVertical: 10,
+            borderRadius: 60,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 16,
+              fontFamily: "Montserrat_600SemiBold",
+              color: "#FFF",
+            }}
+          >
+            RECENT
+          </Text>
+        </View>
+      </View>
+      <View
+        style={{
+            backgroundColor: "#d4b6d6",
+            borderRadius: 40,
+            marginHorizontal: 10,
+            paddingVertical: 20,
+            marginTop: 20,
+            
+        }}
+      >
+        <View
+            style={{
+                flexDirection:"row",
+                alignSelf:"center", //flex-end
+                alignItems:"center",
+                // justifyContent:"space-between"
+            }}
+        >
+          <Image source={require("../../assets/avatar.png")} />
+          <View
+            style={{
+                paddingRight:20,
+                paddingLeft:20,
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ProfileDetail")}
+            >
+              <Text
+                style={{
+                    fontSize:18,
+                    fontFamily:"Montserrat_700Bold",
+                    // color:"#FFF"
+                }}
+              >Ida Niska</Text>
+            </TouchableOpacity>
+            <Text
+                style={{
+                    fontSize: 16,
+                    fontFamily: "Montserrat_400Regular",
+                    color: "#918998",
+                }}
+            >1 hour ago</Text>
+          </View>
+          <Image source={require("../../assets/icons-chevron light.png")} />
+        </View>
+        <Text
+            style={{
+                fontSize:17,
+                fontFamily:"Montserrat_400Regular",
+                // color:"#918998",
+                marginVertical:20,
+                paddingHorizontal:30,
+                textAlign: "center"
+
+            }}
+        >
+          Believe in yourself, take on your challenges, dig deep within yourself
+          to conquer fears. Never let anyone bring you down. You got to keep
+          going.
+        </Text>
+        {/* <View
+            style={{
+                alignItems:"center",
+                flexDirection:"row",
+                justifyContent:"center",
+                marginVertical:5
+                
+            }}
+        >
+          <Text
+            style={{
+                fontSize: 16,
+                fontFamily: "Montserrat_400Regular",
+                // color: "#fff",
+                paddingHorizontal: 10,
+              }}
+          >256</Text>
+          <Image source={require("../../assets/icons-comment-dark.png")} />
+          <Text
+            style={{
+                fontSize: 16,
+                fontFamily: "Montserrat_400Regular",
+                // color: "#fff",
+                paddingLeft: 30,
+                paddingRight: 10,
+              }}
+          >516</Text>
+          <Image source={require("../../assets/icons-like-dark.png")} />
+        </View> */}
+      </View>
+
+
+      
+      <View
+        style={{
+            backgroundColor: "#d4b6d6",
+            borderRadius: 40,
+            marginHorizontal: 10,
+            paddingVertical: 20,
+            marginTop: 20,
+            
+        }}
+      >
+        <View
+            style={{
+                flexDirection:"row",
+                alignSelf:"center", //flex-end
+                alignItems:"center",
+                // justifyContent:"space-between"
+            }}
+        >
+          <Image source={require("../../assets/avatar.png")} />
+          <View
+            style={{
+                paddingRight:20,
+                paddingLeft:20,
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => navigation.navigate("ProfileDetail")}
+            >
+              <Text
+                style={{
+                    fontSize:18,
+                    fontFamily:"Montserrat_700Bold",
+                    // color:"#FFF"
+                }}
+              >Ida Niska</Text>
+            </TouchableOpacity>
+            <Text
+                style={{
+                    fontSize: 16,
+                    fontFamily: "Montserrat_400Regular",
+                    color: "#918998",
+                }}
+            >1 hour ago</Text>
+          </View>
+          <Image source={require("../../assets/icons-chevron light.png")} />
+        </View>
+        <Text
+            style={{
+                fontSize:17,
+                fontFamily:"Montserrat_400Regular",
+                // color:"#918998",
+                marginVertical:20,
+                paddingHorizontal:30,
+                textAlign: "center"
+
+            }}
+        >
+          Believe in yourself, take on your challenges, dig deep within yourself
+          to conquer fears. Never let anyone bring you down. You got to keep
+          going.
+        </Text>
+        
       </View>
     </ScrollView>
   );
