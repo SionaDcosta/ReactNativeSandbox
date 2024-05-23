@@ -25,9 +25,44 @@ const BottomTabNavigator = () => {
                 },
             }}
         >
-            <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="Chat" component={Chat} />
-            <Tab.Screen name="Profile" component={Profile} />
+            <Tab.Screen
+                name="Home"
+                component={Home}
+                options={{
+                    tabBarLabel: '',
+                    tabBarIcon: ({ color, size }) => (
+                        <Icon name="home-outline" color={color} size={30} />
+                    ),
+                }}
+            />
+            <Tab.Screen
+                name="Chat"
+                component={Chat}
+                options={{
+                    tabBarLabel: '',
+                    tabBarIcon: ({ color, size }) => (
+                        <Icon
+                            name="chatbubbles-outline"
+                            color={color}
+                            size={30}
+                        />
+                    ),
+                }}
+            />
+            <Tab.Screen
+                name="Profile"
+                component={Profile}
+                options={{
+                    tabBarLabel: '',
+                    tabBarIcon: ({ color, size }) => (
+                        <Icon
+                            name="person-circle-outline"
+                            color={color}
+                            size={30}
+                        />
+                    ),
+                }}
+            />
         </Tab.Navigator>
     )
 }
@@ -35,7 +70,7 @@ const BottomTabNavigator = () => {
 const Stack = createStackNavigator()
 const StackNavigator = () => {
     return (
-        <Stack.Navigator>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen
                 name="BottomTabNavigator"
                 component={BottomTabNavigator}
