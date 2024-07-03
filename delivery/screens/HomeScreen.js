@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import tailwind from 'twrnc';
 import {AdjustmentsVerticalIcon, ChevronDownIcon, MagnifyingGlassIcon, UserIcon} from 'react-native-heroicons/outline'
-import Categories from '../components/Categories';
+import Categories from '../components/categories';
 
 const HomeScreen = () => {
     const navigation = useNavigation();
