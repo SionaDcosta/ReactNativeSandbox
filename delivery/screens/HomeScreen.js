@@ -22,11 +22,9 @@ const HomeScreen = () => {
         client.fetch(
             `
             *[_type == "featured"]{
-            ...,
-            restaurants[] ->{
-            ...,
-            dishes[]->
-            }
+                _id,
+                name,
+                short_description
             }
             `
         )
@@ -34,7 +32,7 @@ const HomeScreen = () => {
             setFeaturedCategories(data);
         })
     },[])
-console.log(featuredCategories);
+// console.log(featuredCategories);
   return (
     <SafeAreaView style={tailwind`bg-white pt-5`}>
       {/* Header */}
@@ -77,26 +75,18 @@ console.log(featuredCategories);
             <Categories/>
 
             {/* Featured */}
-            <FeaturedRow 
-                id="123"
-                title="Featured"
-                description="Paid placemnets from our partners"
-                
-            />
-            {/* Tasty discounts */}
-            <FeaturedRow
-                id="1234" 
-                title="Tasty Discounts"
-                description="Everyone's been enjoying these juicy discounts!"
-                
-            />
-            {/* Offers near you */}
-            <FeaturedRow 
-                id="12345"
-                title="Offers near you!"
-                description="Why not support your local restaurant tonight!"
-                
-            />
+            {
+                featuredCategories?.map(category => (
+                    <FeaturedRow 
+                    key={category._id}
+                    id={category._id}
+                    title={category.name}
+                    description={category.short_description}
+                    
+                />  
+                ))
+            }
+            
         </ScrollView>
     </SafeAreaView>
   )

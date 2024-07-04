@@ -1,10 +1,40 @@
 import { View, Text, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import tailwind from 'twrnc'
 import { ArrowRightIcon } from 'react-native-heroicons/outline'
 import RestaurantCard from './RestaurantCard'
+import client from '../sanity'
 
 const FeaturedRow = ({id, title, description}) => {
+
+  const [restaurants, setRestaurants] = useState([])
+  useEffect(()=>{
+    client.fetch(`
+        *[type == "featured" && _id == $id]{
+                restaurants[] {
+                    _id,
+                    name,
+                    rating,
+                    genre,
+                    address,
+                    short_description,
+                    dishes[] {
+                        _id,
+                        name,
+                        price,
+                    },
+                    type->{
+                        name
+                    }
+                }
+            }
+            `,
+            { id } //id: id
+    ) .then(data => {
+      setRestaurants(data[0]?.restaurants || []);
+    })
+  },[id]);
+console.log(restaurants);
   return (
     <View>
       <View style={tailwind`mt-4 flex-row items-center justify-between px-4`}>
