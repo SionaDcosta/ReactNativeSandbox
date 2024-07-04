@@ -10,30 +10,23 @@ const FeaturedRow = ({id, title, description}) => {
   const [restaurants, setRestaurants] = useState([])
   useEffect(()=>{
     client.fetch(`
-        *[_type == "featured" && _id == $id]{
-                restaurants[] {
-                    _id,
-                    name,
-                    rating,
-                    genre,
-                    address,
-                    short_description,
-                    dishes[] {
-                        _id,
-                        name,
-                        price,
-                    },
-                    type->{
-                        name
-                    }
-                }
-            }
+        *[_type == "featured" && _id == 'a746c3e1-3a02-4b07-96bd-c8de04cf59a2']{
+        ...,
+        restaurants[]-> {
+        ...,
+        dishes[]->,
+        type->{
+        name
+        }
+        }
+        ,
+        }[0]
             `,
             { id } //id: id
-    ) .then(data => {
-      setRestaurants(data[0]?.restaurants || []);
+    ) .then((data) => {
+      setRestaurants(data?.restaurants);
     })
-  },[id]);
+  },[]);
 console.log(restaurants);
   return (
     <View>
