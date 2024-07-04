@@ -1,14 +1,16 @@
 import { View, Text, Image, TextInput, StyleSheet, ScrollView } from 'react-native'
-import React, { useLayoutEffect } from 'react'
+import React, { useLayoutEffect, useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import tailwind from 'twrnc';
 import {AdjustmentsVerticalIcon, ChevronDownIcon, MagnifyingGlassIcon, UserIcon} from 'react-native-heroicons/outline'
 import Categories from '../components/categories';
 import FeaturedRow from '../components/FeaturedRow';
+import client from '../sanity';
 
 const HomeScreen = () => {
     const navigation = useNavigation();
+    const [featuredCategories, setFeaturedCategories] = useState([]);
 
     useLayoutEffect(()=> {
         navigation.setOptions({
@@ -16,6 +18,23 @@ const HomeScreen = () => {
         });
     },[])
     
+    useEffect(()=>{
+        client.fetch(
+            `
+            *[_type == "featured"]{
+            ...,
+            restaurants[] ->{
+            ...,
+            dishes[]->
+            }
+            }
+            `
+        )
+        .then((data)=>{
+            setFeaturedCategories(data);
+        })
+    },[])
+console.log(featuredCategories);
   return (
     <SafeAreaView style={tailwind`bg-white pt-5`}>
       {/* Header */}
