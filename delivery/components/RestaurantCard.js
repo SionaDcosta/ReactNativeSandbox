@@ -2,6 +2,8 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 import tailwind from 'twrnc'
 import { MapPinIcon, StarIcon } from 'react-native-heroicons/outline'
+import { urlFor } from '../sanity'
+
 
 const RestaurantCard = ({
     id,
@@ -19,7 +21,7 @@ const RestaurantCard = ({
     <TouchableOpacity style={tailwind`bg-white mr-3 shadow`}>
         <Image
             source={{
-                uri:imgUrl,
+                uri: urlFor(imgUrl).url(),
             }}
             style={tailwind`h-36 w-64 rounded-sm`}
         />
@@ -30,7 +32,7 @@ const RestaurantCard = ({
                 <StarIcon color='green' opacity={0.5} size={22}/>
                 <Text style={tailwind`text-xs text-gray-500`}>
                     <Text style={tailwind`text-green-500`}>{rating}</Text>
-                    . {genre}
+                    . {short_description}
                 </Text>
             </View>
 
