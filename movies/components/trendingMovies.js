@@ -1,12 +1,12 @@
 import { View, Text, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
 import Carousel from 'react-native-snap-carousel'
-import tw from 'twrnc'
+import tailwind from 'twrnc'
 
 export default function TrendingMovies({data}) {
   return (
-    <View className='mb-8'>
-      <Text className='text-white text-xl mx-4 mb-5'>Trending</Text>
+    <View style={tailwind`mb-8`}>
+      <Text style={tailwind` text-white text-xl mx-4 mb-5`}>Trending</Text>
       <Carousel
         data={data}
         renderItem={({item}) => <MovieCard item={item}/>}
@@ -23,7 +23,7 @@ export default function TrendingMovies({data}) {
 const MovieCard =({item}) => {
     return (
         <TouchableWithoutFeedback>
-            <Text className='text-white'>Movie</Text>
+            <Text style={tailwind`text-white `}>Movie</Text>
         </TouchableWithoutFeedback>
     )
 }
