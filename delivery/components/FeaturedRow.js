@@ -10,7 +10,7 @@ const FeaturedRow = ({id, title, description}) => {
   const [restaurants, setRestaurants] = useState([])
   useEffect(()=>{
     client.fetch(`
-        *[type == "featured" && _id == $id]{
+        *[_type == "featured" && _id == $id]{
                 restaurants[] {
                     _id,
                     name,
