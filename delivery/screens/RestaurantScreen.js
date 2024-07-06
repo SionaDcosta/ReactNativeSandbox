@@ -68,7 +68,7 @@ const RestaurantScreen = () => {
         </View>
         <TouchableOpacity style={tailwind`flex-row items-center space-x-2 p-4 border border-gray-300`}>
           <QuestionMarkCircleIcon color='gray' opacity={0.6} size={20}/>
-          <Text style={tailwind`pl-2 flex-1 text-md font-bold`}>Have a food allergy?</Text>
+          <Text style={tailwind`pl-2 flex-1 text-md font-bold` }>Have a food allergy?</Text>
           <ChevronRightIcon color='#00CCBB'/>
         </TouchableOpacity>
       </View>
