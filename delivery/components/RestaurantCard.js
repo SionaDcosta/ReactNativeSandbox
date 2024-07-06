@@ -3,6 +3,7 @@ import React from 'react'
 import tailwind from 'twrnc'
 import { MapPinIcon, StarIcon } from 'react-native-heroicons/outline'
 import { urlFor } from '../sanity'
+import { useNavigation } from '@react-navigation/native'
 
 
 const RestaurantCard = ({
@@ -17,8 +18,25 @@ const RestaurantCard = ({
     long,
     lat,
 }) => {
+    const navigation = useNavigation();
+
   return (
-    <TouchableOpacity style={tailwind`bg-white mr-3 shadow`}>
+    <TouchableOpacity 
+    onPress={()=>{
+        navigation.navigate('Restaurant',{
+            id,
+            imgUrl,
+            title,
+            rating,
+            genre,
+            address,
+            short_description,
+            dishes,
+            long,
+            lat,
+        })
+    }}
+    style={tailwind`bg-white mr-3 shadow`}>
         <Image
             source={{
                 uri: urlFor(imgUrl).url(),
