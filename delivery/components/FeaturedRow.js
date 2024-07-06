@@ -27,7 +27,7 @@ const FeaturedRow = ({id, title, description}) => {
       setRestaurants(data?.restaurants);
     })
   },[id]);
-console.log(restaurants);
+// console.log(restaurants);
   return (
     <View>
       <View style={tailwind`mt-4 flex-row items-center justify-between px-4`}>
