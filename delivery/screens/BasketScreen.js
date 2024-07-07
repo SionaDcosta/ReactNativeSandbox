@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { useDispatch, useSelector } from 'react-redux';
 import { selectRestaurant } from '../features/restaurantSlice';
-import { removeFromBasket, selectBasketItems } from '../features/basketSlice';
+import { removeFromBasket, selectBasketItems, selectBasketTotal } from '../features/basketSlice';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import tailwind from 'twrnc';
 import { XCircleIcon } from 'react-native-heroicons/outline';
@@ -14,6 +14,7 @@ const BasketScreen = () => {
     const navigation = useNavigation();
     const restaurant = useSelector(selectRestaurant);
     const items = useSelector(selectBasketItems);
+    const basketTotal = useSelector(selectBasketTotal);
     const [groupedItemsInBasket,setGroupedItemsInBasket] = useState([]);
     const dispatch = useDispatch();
 
@@ -75,6 +76,29 @@ const BasketScreen = () => {
                 </View>
             ))}
         </ScrollView>
+        <View style={tailwind`p-5 bg-white mt-5 space-y-4`}>
+            <View style={tailwind`flex-row justify-between`}>
+                <Text style={tailwind`text-gray-400`}>Subtotal</Text>
+                <Text style={tailwind`text-gray-400`}>
+                {currencyFormatter.format(basketTotal, { code: 'INR' })}
+                </Text>
+            </View>
+            <View style={tailwind`flex-row justify-between`}>
+                <Text style={tailwind`text-gray-400`}>Delivery Fee</Text>
+                <Text style={tailwind`text-gray-400`}>
+                {currencyFormatter.format(49.50, { code: 'INR' })}
+                </Text>
+            </View>
+            <View style={tailwind`flex-row justify-between`}>
+                <Text>Order Total</Text>
+                <Text style={tailwind`font-extrabold`}>
+                {currencyFormatter.format(basketTotal+49.50, { code: 'INR' })}
+                </Text>
+            </View>
+            <TouchableOpacity style={tailwind`rounded-lg bg-[#00CCBB] p-4 mt-2`}>
+                <Text style={tailwind`text-center text-white text-lg font-bold`}>Place Order</Text>
+            </TouchableOpacity>
+        </View>
       </View>
     </SafeAreaView>
   )
