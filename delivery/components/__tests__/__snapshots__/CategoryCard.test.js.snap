@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoryCard Component renders correctly 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": undefined,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={false}
+  onClick={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    {
+      "marginRight": 8,
+      "opacity": 1,
+      "position": "relative",
+    }
+  }
+  testID="category-card"
+>
+  <Image
+    source={
+      {
+        "uri": "https://example.com/image.jpg",
+      }
+    }
+    style={
+      {
+        "borderRadius": 4,
+        "height": 80,
+        "width": 80,
+      }
+    }
+    testID="category-card-image"
+  />
+  <Text
+    style={
+      {
+        "bottom": 4,
+        "color": "#fff",
+        "fontWeight": "bold",
+        "left": 4,
+        "position": "absolute",
+      }
+    }
+    testID="category-card-title"
+  >
+    Example Title
+  </Text>
+</View>
+`;
