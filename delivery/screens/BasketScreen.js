@@ -95,7 +95,9 @@ const BasketScreen = () => {
                 {currencyFormatter.format(basketTotal+49.50, { code: 'INR' })}
                 </Text>
             </View>
-            <TouchableOpacity style={tailwind`rounded-lg bg-[#00CCBB] p-4 mt-2`}>
+            <TouchableOpacity 
+            onPress={()=> navigation.navigate("PreparingOrderScreen")}
+            style={tailwind`rounded-lg bg-[#00CCBB] p-4 mt-2`}>
                 <Text style={tailwind`text-center text-white text-lg font-bold`}>Place Order</Text>
             </TouchableOpacity>
         </View>
