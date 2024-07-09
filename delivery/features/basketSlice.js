@@ -17,7 +17,7 @@ export const basketSlice = createSlice({
       let newBasket = [...state.items];
 
       if(index >= 0){
-        newBasket.splice(index,1)
+        newBasket.splice(index,1) //splice(index,count), removal starts from the index position towards the end of the array
       }else{
         console.warn(`Can't remove product (id: ${action.payload.id}) as it's not in the basket!`)
       }
