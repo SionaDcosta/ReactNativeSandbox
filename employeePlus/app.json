@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "delivery",
-    "slug": "delivery",
+    "name": "employeePlus",
+    "slug": "employeePlus",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -20,6 +20,7 @@
         "backgroundColor": "#ffffff"
       }
     },
+    "scheme": "employeePlus",
     "web": {
       "favicon": "./assets/favicon.png"
     },

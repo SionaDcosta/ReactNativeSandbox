@@ -31,7 +31,10 @@
     "react-redux": "^9.1.2",
     "react-test-renderer": "^18.2.0",
     "redux-mock-store": "^1.5.4",
-    "twrnc": "^4.3.0"
+    "twrnc": "^4.3.0",
+    "expo-router": "~3.5.17",
+    "expo-linking": "~6.3.1",
+    "expo-constants": "~16.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
