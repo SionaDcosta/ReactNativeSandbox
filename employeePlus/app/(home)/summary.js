@@ -25,7 +25,7 @@ const summary = () => {
   const fetchAttendanceReport = async () => {
     try {
       const respone = await axios.get(
-        `http://192.168.58.94:8000/attendance-report-all-employees`,
+        `http://10.0.2.2:8000/attendance-report-all-employees`,
         {
           params: {
             month: 11,

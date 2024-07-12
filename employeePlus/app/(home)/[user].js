@@ -41,7 +41,7 @@ import {
           status: attendanceStatus,
         };
         const response = await axios.post(
-          "http://192.168.58.94:8000/attendance",
+          "http://10.0.2.2:8000/attendance",
           attendanceData
         );
   

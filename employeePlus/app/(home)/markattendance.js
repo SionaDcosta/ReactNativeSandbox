@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import axios from "axios";
-import { AntDesign } from "@expo/vector-icons";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 
 const markattendance = () => {
@@ -27,7 +27,7 @@ const markattendance = () => {
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        const response = await axios.get("http://192.168.58.94:8000/employees");
+        const response = await axios.get("http://10.0.2.2:8000/employees");
         setEmployees(response.data);
       } catch (error) {
         console.log("error fetching employee data", error);
@@ -38,7 +38,7 @@ const markattendance = () => {
   const [attendance, setAttendance] = useState([]);
   const fetchAttendanceData = async () => {
     try {
-      const response = await axios.get(`http://192.168.58.94:8000/attendance`, {
+      const response = await axios.get(`http://10.0.2.2:8000/attendance`, {
         params: {
           date: currentDate.format("MMMM D, YYYY"),
         },
@@ -64,6 +64,13 @@ const markattendance = () => {
   });
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
+      <Ionicons
+          onPress={() => router.back()}
+          style={styles.icon}
+          name="arrow-back"
+          size={24}
+          color="black"
+        />
       <Pressable>
         <View
           style={{

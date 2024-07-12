@@ -98,6 +98,7 @@ const index = () => {
             }}
           >
             <Pressable
+            onPress={() => router.push('/attendanceReport')}
               style={{
                 backgroundColor: "#BE93C5",
                 borderRadius: 6,

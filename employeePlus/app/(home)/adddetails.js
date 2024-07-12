@@ -9,6 +9,8 @@ import {
   } from "react-native";
   import React, { useState } from "react";
   import axios from "axios";
+  import { Ionicons, AntDesign } from "@expo/vector-icons";
+  import { useRouter } from "expo-router";
   
   const adddetails = () => {
     const [name, setName] = useState("");
@@ -33,7 +35,7 @@ import {
       };
   
       axios
-        .post("http://192.168.58.94:8000/addEmployee", employeeData)
+        .post("http://10.0.2.2:8000/addEmployee", employeeData)
         .then((response) => {
           Alert.alert(
             "Registration Successful",
@@ -56,13 +58,23 @@ import {
           console.log("register failed", error);
         });
     };
+    
+    const router = useRouter();
+
     return (
       <ScrollView style={{ flex: 1, backgroundColor: "white" }}>
         <View style={{ padding: 10 }}>
+        <Ionicons
+          onPress={() => router.back()}
+          style={styles.icon}
+          name="arrow-back"
+          size={24}
+          color="black"
+        />
           <Text style={{ fontSize: 17, fontWeight: "bold" }}>
             Add a New Employee
           </Text>
-  
+{/*   
           <TextInput
             style={{
               padding: 10,
@@ -73,11 +85,11 @@ import {
             }}
             placeholder="India"
             placeholderTextColor={"black"}
-          />
+          /> */}
   
           <View style={{ marginVertical: 10 }}>
             <Text style={{ fontSize: 17, fontWeight: "bold" }}>
-              Full Name (First and last Name)
+              Full Name
             </Text>
             <TextInput
               value={name}
