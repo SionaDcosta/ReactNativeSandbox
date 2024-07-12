@@ -1,10 +1,9 @@
-//require("express") returns a func and that func we store in express
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const moment = require("moment");
 
-const app = express(); // we initialtize the app here by invoking express
+const app = express();
 const port = 8000;
 const cors = require("cors");
 app.use(cors());
@@ -24,7 +23,6 @@ mongoose
     console.log("Error connecting to MongoDB", error);
   });
 
-  //listens to req on a specific port no. Over here PN: 8000
 app.listen(port, () => {
   console.log("Server is running on port 8000");
 });
@@ -32,7 +30,6 @@ app.listen(port, () => {
 const Employee = require("./models/employee");
 const Attendance = require("./models/attendance");
 
-//endpoint to register a employee
 app.post("/addEmployee", async (req, res) => {
   try {
     const {
@@ -47,7 +44,6 @@ app.post("/addEmployee", async (req, res) => {
       address,
     } = req.body;
 
-    //create a new Employee
     const newEmployee = new Employee({
       employeeName,
       employeeId,
@@ -62,17 +58,13 @@ app.post("/addEmployee", async (req, res) => {
 
     await newEmployee.save();
 
-    res
-      .status(201)
-      .json({ message: "Employee saved successfully", employee: newEmployee });
+    res.status(201).json({ message: "Employee added successfully", employee: newEmployee });
   } catch (error) {
     console.log("Error creating employee", error);
     res.status(500).json({ message: "Failed to add an employee" });
   }
 });
 
-//GET route handler
-//endpoint to fetch all the employees
 app.get("/employees", async (req, res) => {
   try {
     const employees = await Employee.find();
@@ -86,7 +78,9 @@ app.post("/attendance", async (req, res) => {
   try {
     const { employeeId, employeeName, date, status } = req.body;
 
-    const existingAttendance = await Attendance.findOne({ employeeId, date });
+    const formattedDate = moment(date).format("MMMM D, YYYY");
+
+    const existingAttendance = await Attendance.findOne({ employeeId, date: formattedDate });
 
     if (existingAttendance) {
       existingAttendance.status = status;
@@ -96,7 +90,7 @@ app.post("/attendance", async (req, res) => {
       const newAttendance = new Attendance({
         employeeId,
         employeeName,
-        date,
+        date: formattedDate,
         status,
       });
       await newAttendance.save();
@@ -107,12 +101,13 @@ app.post("/attendance", async (req, res) => {
   }
 });
 
-app.get("/attendance", async (req, res) => {
+app.get("/attendances", async (req, res) => {
   try {
     const { date } = req.query;
 
-    // Find attendance records for the specified date
-    const attendanceData = await Attendance.find({ date: date });
+    const formattedDate = moment(date).format("MMMM D, YYYY");
+
+    const attendanceData = await Attendance.find({ date: formattedDate });
 
     res.status(200).json(attendanceData);
   } catch (error) {
@@ -121,93 +116,154 @@ app.get("/attendance", async (req, res) => {
 });
 
 app.get("/attendance-report-all-employees", async (req, res) => {
-    try {
-      const { month, year } = req.query;
-  
-      console.log("Query parameters:", month, year);
-      // Calculate the start and end dates for the selected month and year
-      const startDate = moment(`${year}-${month}-01`, "YYYY-MM-DD")
-        .startOf("month")
-        .toDate();
-      const endDate = moment(startDate).endOf("month").toDate();
-  
-      // Aggregate attendance data for all employees and date range
-      const report = await Attendance.aggregate([
-        {
-          $match: {
-            $expr: {
-              $and: [
-                {
-                  $eq: [
-                    { $month: { $dateFromString: { dateString: "$date" } } },
-                    parseInt(req.query.month),
-                  ],
-                },
-                {
-                  $eq: [
-                    { $year: { $dateFromString: { dateString: "$date" } } },
-                    parseInt(req.query.year),
-                  ],
-                },
-              ],
+  try {
+    const { month, year } = req.query;
+
+    console.log("Query parameters:", month, year);
+
+    const startDate = moment(`${year}-${month}-01`, "YYYY-MM-DD").startOf("month").toDate();
+    const endDate = moment(startDate).endOf("month").toDate();
+
+    const report = await Attendance.aggregate([
+      {
+        $match: {
+          $expr: {
+            $and: [
+              {
+                $eq: [{ $month: { $dateFromString: { dateString: "$date" } } }, parseInt(req.query.month)],
+              },
+              {
+                $eq: [{ $year: { $dateFromString: { dateString: "$date" } } }, parseInt(req.query.year)],
+              },
+            ],
+          },
+        },
+      },
+      {
+        $group: {
+          _id: "$employeeId",
+          present: {
+            $sum: {
+              $cond: { if: { $eq: ["$status", "present"] }, then: 1, else: 0 },
+            },
+          },
+          absent: {
+            $sum: {
+              $cond: { if: { $eq: ["$status", "absent"] }, then: 1, else: 0 },
+            },
+          },
+          halfday: {
+            $sum: {
+              $cond: { if: { $eq: ["$status", "halfday"] }, then: 1, else: 0 },
+            },
+          },
+          holiday: {
+            $sum: {
+              $cond: { if: { $eq: ["$status", "holiday"] }, then: 1, else: 0 },
             },
           },
         },
-  
-        {
-          $group: {
-            _id: "$employeeId",
-            present: {
-              $sum: {
-                $cond: { if: { $eq: ["$status", "present"] }, then: 1, else: 0 },
-              },
-            },
-            absent: {
-              $sum: {
-                $cond: { if: { $eq: ["$status", "absent"] }, then: 1, else: 0 },
-              },
-            },
-            halfday: {
-              $sum: {
-                $cond: { if: { $eq: ["$status", "halfday"] }, then: 1, else: 0 },
-              },
-            },
-            holiday: {
-              $sum: {
-                $cond: { if: { $eq: ["$status", "holiday"] }, then: 1, else: 0 },
-              },
-            },
-          },
+      },
+      {
+        $lookup: {
+          from: "employees",
+          localField: "_id",
+          foreignField: "employeeId",
+          as: "employeeDetails",
         },
-        {
-          $lookup: {
-            from: "employees", // Name of the employee collection
-            localField: "_id",
-            foreignField: "employeeId",
-            as: "employeeDetails",
-          },
+      },
+      {
+        $unwind: "$employeeDetails",
+      },
+      {
+        $project: {
+          _id: 1,
+          present: 1,
+          absent: 1,
+          halfday: 1,
+          name: "$employeeDetails.employeeName",
+          designation: "$employeeDetails.designation",
+          salary: "$employeeDetails.salary",
+          employeeId: "$employeeDetails.employeeId",
         },
-        {
-          $unwind: "$employeeDetails", // Unwind the employeeDetails array
-        },
-        {
-          $project: {
-            _id: 1,
-            present: 1,
-            absent: 1,
-            halfday: 1,
-            name: "$employeeDetails.employeeName",
-            designation:"$employeeDetails.designation",
-            salary: "$employeeDetails.salary",
-            employeeId: "$employeeDetails.employeeId",
-          },
-        },
-      ]);
-  
-      res.status(200).json({ report });
-    } catch (error) {
-      console.error("Error generating attendance report:", error);
-      res.status(500).json({ message: "Error generating the report" });
-    }
-  });
-  
+      },
+    ]);
+
+    res.status(200).json({ report });
+  } catch (error) {
+    console.error("Error generating attendance report:", error);
+    res.status(500).json({ message: "Error generating the report" });
+  }
+});
+
+// Day-wise Attendance Endpoint
+app.get("/attendance-day", async (req, res) => {
+  try {
+    const { date } = req.query;
+
+    const formattedDate = moment(date).format("MMMM D, YYYY");
+console.log(formattedDate);
+    const attendanceData = await Attendance.find({ date: formattedDate });
+    res.status(200).json(attendanceData);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching day-wise attendance data" });
+  }
+});
+
+// Week-wise Attendance Endpoint
+app.get("/attendance-week", async (req, res) => {
+  try {
+    const { week, year } = req.query;
+
+    // Calculate start and end dates for the specified week using ISO week dates
+    const startDate = moment().isoWeekYear(year).isoWeek(week).startOf('isoWeek').toDate();
+    const endDate = moment(startDate).endOf('isoWeek').toDate();
+
+    // Format dates for display purposes
+    const formattedStartDate = moment(startDate).format("MMMM D, YYYY");
+    const formattedEndDate = moment(endDate).format("MMMM D, YYYY");
+
+    // Query attendance data for the specified date range using UTC dates
+    const attendanceData = await Attendance.find({
+      date: {
+        $gte: new Date(startDate.toISOString()), // Convert to UTC date
+        $lte: new Date(endDate.toISOString()),   // Convert to UTC date
+      },
+    });
+
+    console.log(attendanceData);
+    console.log("Start Date:", formattedStartDate);
+    console.log("End Date:", formattedEndDate);
+
+    res.status(200).json(attendanceData);
+  } catch (error) {
+    console.error("Error fetching week-wise attendance data:", error);
+    res.status(500).json({ message: "Error fetching week-wise attendance data" });
+  }
+});
+
+
+
+// Month-wise Attendance Endpoint
+app.get("/attendance-month", async (req, res) => {
+  try {
+    const { month, year } = req.query;
+
+    const startDate = moment(`${year}-${month}-01`, "YYYY-MM-DD").startOf("month").toDate();
+    const endDate = moment(startDate).endOf("month").toDate();
+
+    const attendanceData = await Attendance.find({
+      date: {
+        $gte: startDate,
+        $lte: endDate,
+      },
+    });
+
+    res.status(200).json(attendanceData);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching month-wise attendance data" });
+  }
+});
+
+
+module.exports = app;
