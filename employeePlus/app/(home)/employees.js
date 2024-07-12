@@ -14,7 +14,7 @@ const Employees = () => {
     const fetchEmployeeData = async () => {
       try {
         const response = await axios.get("http://10.0.2.2:8000/employees");
-
+        //Use 10.0.2.2 for Android Emulator: Android emulators have a special alias to refer to the host machine's localhost
         console.log("Response from server:", response.data);
         setEmployees(response.data);
       } catch (error) {
