@@ -14,6 +14,7 @@ const employees = () => {
     const fetchEmployeeData = async () => {
       try {
         const response = await axios.get("http://192.168.58.94:8000/employees");
+        console.log("Response from server:", response);
         setEmployees(response.data);
       } catch (error) {
         console.log("error fetching employee data", error);

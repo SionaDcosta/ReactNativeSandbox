@@ -20,7 +20,7 @@ const index = () => {
           >
             <Feather name="bar-chart" size={24} color="black" />
             <Text style={{ fontSize: 16, fontWeight: "600" }}>
-              Employee Managament System
+              Employee Management System
             </Text>
             <Entypo name="lock" size={24} color="black" />
           </View>
@@ -54,7 +54,7 @@ const index = () => {
                   justifyContent: "center",
                 }}
               >
-                <Ionicons name="ios-people-sharp" size={24} color="black" />
+                <Ionicons name="people-sharp" size={24} color="black" />
               </View>
               <Text style={{ marginTop: 7, fontWeight: "600" }}>
                 Employee List
@@ -81,7 +81,7 @@ const index = () => {
                   justifyContent: "center",
                 }}
               >
-                <Ionicons name="ios-people-sharp" size={24} color="black" />
+                <Ionicons name="people-sharp" size={24} color="black" />
               </View>
               <Text style={{ marginTop: 7, fontWeight: "600" }}>
                 Mark Attendance

@@ -1,9 +1,10 @@
+//require("express") returns a func and that func we store in express
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const moment = require("moment");
 
-const app = express();
+const app = express(); // we initialtize the app here by invoking express
 const port = 8000;
 const cors = require("cors");
 app.use(cors());
@@ -12,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 mongoose
-  .connect("mongodb+srv://sujan:sujan@cluster0.zv7uvht.mongodb.net/", {
+  .connect("mongodb+srv://siona:siona@cluster0.c7dgdmr.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -23,6 +24,7 @@ mongoose
     console.log("Error connecting to MongoDB", error);
   });
 
+  //listens to req on a specific port no. Over here PN: 8000
 app.listen(port, () => {
   console.log("Server is running on port 8000");
 });
@@ -69,6 +71,7 @@ app.post("/addEmployee", async (req, res) => {
   }
 });
 
+//GET route handler
 //endpoint to fetch all the employees
 app.get("/employees", async (req, res) => {
   try {
