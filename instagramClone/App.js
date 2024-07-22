@@ -1,22 +1,29 @@
-import { View, Text } from "react-native";
-import HomeScreen from "./screens/HomeScreen";
-import NewPostScreen from "./screens/NewPostScreen";
-import SignedInStack from "./navigation";
-import 'react-native-gesture-handler';
-import React, {useState, useEffect} from "react";
-// import {initializeApp} from '@firebase/app'
-// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "@firebase/auth";
- 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyDWUsHaMWen7ueGvxZRtqtDPsjyOXSVp8I",
-//   authDomain: "rn-instgaramclone.firebaseapp.com",
-//   projectId: "rn-instgaramclone",
-//   storageBucket: "rn-instgaramclone.appspot.com",
-//   messagingSenderId: "474479315321",
-//   appId: "1:474479315321:web:ffe10bc3d6c188422b87a8"
-// };
+import React, { useState, useEffect } from 'react'
+import { NavigationContainer } from '@react-navigation/native'
+import AuthStack from './AuthStack' // Create AuthStack.js for auth screens
+import AppStack from './AppStack' // Create AppStack.js for main app screens
+import { auth } from './components/loginScreen/firebase' // Import your Firebase auth instance
+import { onAuthStateChanged } from '@firebase/auth'
+import 'react-native-gesture-handler'
 
-// const app = initializeApp(firebaseConfig);
 export default function App() {
-  return <SignedInStack/>
+    const [isAuthenticated, setIsAuthenticated] = useState(null) // null indicates loading
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            setIsAuthenticated(user ? true : false)
+        })
+
+        return () => unsubscribe() // Clean up the subscription on unmount
+    }, [])
+
+    if (isAuthenticated === null) {
+        return null // Render nothing or a loading spinner while checking authentication
+    }
+
+    return (
+        <NavigationContainer>
+            {isAuthenticated ? <AppStack /> : <AuthStack />}
+        </NavigationContainer>
+    )
 }
