@@ -50,7 +50,7 @@ const HomeScreen = () => {
     return (
         <SafeAreaView style={tailwind`bg-white pt-5`}>
             {/* Header */}
-            <View style={tailwind`flex-row pb-3 items-center mx-4 space-x-2`}>
+            <View style={tailwind`flex-row pb-3 items-center mx-4`}>
                 <Image
                     source={{ uri: 'https://links.papareact.com/wru' }}
                     style={tailwind`h-7 w-7 bg-gray-300 p-4 rounded-full`}
@@ -72,18 +72,25 @@ const HomeScreen = () => {
             </View>
 
             {/* Search */}
-            <View style={tailwind`flex-row items-center space-x-2 pb-2 mx-4`}>
+            <View style={tailwind`flex-row items-center pb-2 mx-4`}>
                 <View
-                    style={tailwind`flex-row flex-1 space-x-2 bg-gray-200 p-3`}
+                    style={tailwind`flex-row flex-1 rounded-full bg-gray-200 p-3`}
                 >
-                    <MagnifyingGlassIcon size={20} color="gray" />
+                    <MagnifyingGlassIcon
+                        size={20}
+                        color="gray"
+                        style={tailwind`pr-8 mt-1`}
+                    />
                     <TextInput
                         placeholder="Restaurants and cuisines"
                         placeholderTextColor="gray"
                         keyboardType="default"
                     />
                 </View>
-                <AdjustmentsVerticalIcon color="#00CCBB" />
+                <AdjustmentsVerticalIcon
+                    color="#00CCBB"
+                    style={tailwind`pl-8`}
+                />
             </View>
 
             {/* Body */}

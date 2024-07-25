@@ -1,10 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { View, TextInput, Button, StyleSheet, Text } from 'react-native'
 import axios from 'axios'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
+import { useDispatch } from 'react-redux'
+import { setAuthenticated, saveAuthState } from '../features/authSlice'
 
 const LoginScreen = ({ navigation }) => {
+    const dispatch = useDispatch()
+
     const loginValidationSchema = Yup.object().shape({
         email: Yup.string()
             .email('Invalid email address')
@@ -15,18 +19,16 @@ const LoginScreen = ({ navigation }) => {
     const handleLogin = async (values) => {
         try {
             const response = await axios.post(
-                'http://192.168.107.94:5000/login', // replace with your local IP address
+                'http://192.168.107.94:5000/login',
                 values
             )
-            console.log('Response:', response) // Log the entire response object
             if (response && response.data) {
-                console.log(response.data)
-                navigation.navigate('Home')
-            } else {
-                console.error('No data in response:', response)
+                dispatch(setAuthenticated(true))
+                dispatch(saveAuthState(true))
+                navigation.navigate('App')
             }
         } catch (error) {
-            console.error('Error:', error) // Log the entire error object
+            console.error('Error:', error)
             if (error.response && error.response.data) {
                 console.error('Error response data:', error.response.data)
             } else {
