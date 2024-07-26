@@ -1,4 +1,4 @@
-import { View, Text, Image, ScrollView } from 'react-native'
+import { View, Text } from 'react-native'
 import React from 'react'
 import tailwind from 'twrnc'
 
@@ -17,24 +17,6 @@ const MenuCard = ({ item }) => {
                 shadowRadius: 10,
             }}
         >
-            {/* <View
-                style={[
-                    {
-                        shadowColor: 'black',
-                        shadowRadius: 30,
-                        shadowOffset: { width: 0, height: 0 },
-                        shadowOpacity: 0.8,
-                        elevation: 10,
-                    },
-                    tailwind`flex-row justify-center `,
-                ]}
-            >
-                <Image
-                    source={require('../assets/food-bg.jpg')}
-                    style={tailwind`h-40 w-40 rounded-full`}
-                />
-                <Text>Menu</Text>
-            </View> */}
             <View style={tailwind`px-5 mt-6 items-center`}>
                 {Object.keys(item).map((day, index) => (
                     <View key={index} style={tailwind`mb-4`}>

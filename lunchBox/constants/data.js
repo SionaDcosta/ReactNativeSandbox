@@ -1,10 +1,14 @@
 export const categories = [
     {
         id: 1,
-        title: 'Veg',
+        title: 'All',
     },
     {
         id: 2,
+        title: 'Veg',
+    },
+    {
+        id: 3,
         title: 'Non-Veg',
     },
 ]

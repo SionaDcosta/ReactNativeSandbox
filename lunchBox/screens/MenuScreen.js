@@ -1,3 +1,5 @@
+// screens/MenuScreen.js
+
 import React, { useState, useEffect } from 'react'
 import {
     View,
@@ -33,17 +35,19 @@ const getWeekOfMonth = (date) => {
 const MenuScreen = () => {
     const [activeCategory, setActiveCategory] = useState(1)
     const [currentMenu, setCurrentMenu] = useState([])
+    const [filteredMenu, setFilteredMenu] = useState([])
     const width = Dimensions.get('window').width
 
     useEffect(() => {
         const today = new Date()
         const weekOfMonth = getWeekOfMonth(today)
         const dayOfWeek = today.toLocaleString('default', { weekday: 'long' }) // Get the current day name
-        console.log(dayOfWeek)
+
         // Get the menu for the current week
         const currentWeekMenu = MenuItems.find(
             (menu) => menu.week === `Week ${weekOfMonth}`
         )
+
         if (currentWeekMenu) {
             // Get the menu for the current week and reorder starting from today
             const currentDayIndex = Object.keys(currentWeekMenu.menu).indexOf(
@@ -57,8 +61,29 @@ const MenuScreen = () => {
                 ),
             ]
             setCurrentMenu(reorderedMenu)
+            setFilteredMenu(reorderedMenu)
         }
     }, [])
+
+    useEffect(() => {
+        filterMenu(activeCategory)
+    }, [activeCategory, currentMenu])
+
+    const filterMenu = (category) => {
+        if (category === 1) {
+            setFilteredMenu(currentMenu)
+        } else if (category === 2) {
+            const vegDays = ['Monday', 'Tuesday', 'Thursday']
+            setFilteredMenu(
+                currentMenu.filter(([day]) => vegDays.includes(day))
+            )
+        } else if (category === 3) {
+            const nonVegDays = ['Wednesday', 'Friday']
+            setFilteredMenu(
+                currentMenu.filter(([day]) => nonVegDays.includes(day))
+            )
+        }
+    }
 
     return (
         <View style={tailwind`flex-1 relative bg-white`}>
@@ -127,7 +152,7 @@ const MenuScreen = () => {
                             loop
                             width={width}
                             height={410}
-                            data={currentMenu} // Pass the reordered menu
+                            data={filteredMenu} // Pass the filtered menu
                             mode="parallax"
                             parallaxScrollingScale={0.9}
                             parallaxScrollingOffset={20}
