@@ -76,7 +76,8 @@ app.post('/login', async (req, res) => {
     const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
         expiresIn: '30d',
     })
-    res.status(200).json({ token })
+
+    res.status(200).json({ token, username: user.username }) // Include username in the response
 })
 
 app.listen(PORT, () => {

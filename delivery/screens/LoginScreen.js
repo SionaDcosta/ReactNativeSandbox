@@ -19,12 +19,15 @@ const LoginScreen = ({ navigation }) => {
     const handleLogin = async (values) => {
         try {
             const response = await axios.post(
-                'http://192.168.107.94:5000/login',
+                // 'http://192.168.107.94:5000/login',
+                'http://10.0.2.2:5000/login',
                 values
             )
             if (response && response.data) {
-                dispatch(setAuthenticated(true))
-                dispatch(saveAuthState(true))
+                const { username } = response.data
+                console.log(username)
+                dispatch(setAuthenticated({ isAuthenticated: true, username }))
+                dispatch(saveAuthState({ isAuthenticated: true, username }))
                 navigation.navigate('App')
             }
         } catch (error) {

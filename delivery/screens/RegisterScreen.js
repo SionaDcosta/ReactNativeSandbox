@@ -22,7 +22,8 @@ const RegisterScreen = ({ navigation }) => {
         console.log('Helloooo1')
         try {
             const response = await axios.post(
-                'http://192.168.107.94:5000/register',
+                // 'http://192.168.107.94:5000/register',
+                'http://10.0.2.2:5000/register',
                 values
             )
             console.log(response.data)

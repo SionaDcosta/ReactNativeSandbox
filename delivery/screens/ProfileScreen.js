@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import { ArrowLeftIcon } from 'react-native-heroicons/outline'
 import tailwind from 'twrnc'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setAuthenticated, saveAuthState } from '../features/authSlice'
 
 const w = Dimensions.get('window').width
@@ -18,6 +18,7 @@ const h = Dimensions.get('window').height
 
 const ProfileScreen = ({ navigation }) => {
     const dispatch = useDispatch()
+    const username = useSelector((state) => state.auth.username)
 
     const handleSignOut = () => {
         dispatch(setAuthenticated(false))
@@ -65,8 +66,18 @@ const ProfileScreen = ({ navigation }) => {
                 <Text
                     style={{
                         color: '#000',
+                        fontSize: 24,
+                        fontWeight: 'bold',
+                        marginTop: 30,
+                    }}
+                >
+                    {console.log(username)}
+                    Hola {username},
+                </Text>
+                <Text
+                    style={{
+                        color: '#000',
                         fontSize: 18,
-
                         marginTop: 30,
                     }}
                 >
@@ -76,7 +87,6 @@ const ProfileScreen = ({ navigation }) => {
                     style={{
                         color: '#000',
                         fontSize: 18,
-
                         marginTop: 30,
                     }}
                 >
@@ -86,7 +96,6 @@ const ProfileScreen = ({ navigation }) => {
                     style={{
                         color: '#000',
                         fontSize: 18,
-
                         marginTop: 30,
                     }}
                 >
@@ -96,7 +105,6 @@ const ProfileScreen = ({ navigation }) => {
                     style={{
                         color: '#000',
                         fontSize: 18,
-
                         marginTop: 30,
                     }}
                 >
@@ -107,9 +115,9 @@ const ProfileScreen = ({ navigation }) => {
                         style={{
                             color: '#000',
                             fontSize: 18,
-
                             marginTop: 30,
                         }}
+                        a
                     >
                         Signout
                     </Text>
@@ -122,3 +130,59 @@ const ProfileScreen = ({ navigation }) => {
 export default ProfileScreen
 
 const styles = StyleSheet.create({})
+
+// import React from 'react'
+// import {
+//     ImageBackground,
+//     StyleSheet,
+//     TouchableOpacity,
+//     Dimensions,
+//     Image,
+// } from 'react-native'
+// import { View } from 'react-native-animatable'
+// import { SafeAreaView } from 'react-native-safe-area-context'
+// import { MaterialIcons } from '@expo/vector-icons'
+// import { LinearGradient } from 'expo-linear-gradient'
+// const { height, width } = Dimensions.get('window')
+// const ProfileScreen = ({ navigation }) => {
+//     return (
+//         <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+//             <View
+//                 style={{
+//                     width: '100%',
+//                 }}
+//             >
+//                 <LinearGradient
+//                     colors={['rgba(0, 204, 187,0.7)', 'transparent']}
+//                     style={styles.linearGradient}
+//                     start={{ x: 0.5, y: 1 }}
+//                     end={{ x: 0.5, y: 0 }}
+//                 />
+//             </View>
+//             <View style={{ flex: 1, alignItems: 'center' }}>
+//                 <Image
+//                     source={require('../assets/unsplash.jpg')}
+//                     resizeMode="contain"
+//                     style={{
+//                         height: 155,
+//                         width: 155,
+//                         borderRadius: 100,
+//                         // borderColor: COLORS.primary,
+//                         borderWidth: 2,
+//                         marginTop: -90,
+//                     }}
+//                 />
+//             </View>
+//         </SafeAreaView>
+//     )
+// }
+// export default ProfileScreen
+
+// const styles = StyleSheet.create({
+//     linearGradient: {
+//         width: width,
+//         height: 228,
+//         justifyContent: 'center',
+//         alignItems: 'center',
+//     },
+// })
