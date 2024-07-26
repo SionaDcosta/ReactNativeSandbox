@@ -20,7 +20,7 @@ import Carousel from 'react-native-reanimated-carousel'
 import { categories, MenuItems } from '../constants/data'
 import MenuCard from '../components/MenuCard'
 
-// Utility function to get current week of the month
+// Utility function to get the current week of the month
 const getWeekOfMonth = (date) => {
     const startWeekDayIndex = 1 // Set the start of the week to Monday (0 for Sunday, 1 for Monday, etc.)
     const firstDate = new Date(date.getFullYear(), date.getMonth(), 1)
@@ -32,21 +32,31 @@ const getWeekOfMonth = (date) => {
 
 const MenuScreen = () => {
     const [activeCategory, setActiveCategory] = useState(1)
-    const [currentMenu, setCurrentMenu] = useState({})
+    const [currentMenu, setCurrentMenu] = useState([])
     const width = Dimensions.get('window').width
 
     useEffect(() => {
         const today = new Date()
         const weekOfMonth = getWeekOfMonth(today)
         const dayOfWeek = today.toLocaleString('default', { weekday: 'long' }) // Get the current day name
-
+        console.log(dayOfWeek)
         // Get the menu for the current week
         const currentWeekMenu = MenuItems.find(
             (menu) => menu.week === `Week ${weekOfMonth}`
         )
         if (currentWeekMenu) {
-            // Get the menu for the current day
-            setCurrentMenu(currentWeekMenu.menu)
+            // Get the menu for the current week and reorder starting from today
+            const currentDayIndex = Object.keys(currentWeekMenu.menu).indexOf(
+                dayOfWeek
+            )
+            const reorderedMenu = [
+                ...Object.entries(currentWeekMenu.menu).slice(currentDayIndex),
+                ...Object.entries(currentWeekMenu.menu).slice(
+                    0,
+                    currentDayIndex
+                ),
+            ]
+            setCurrentMenu(reorderedMenu)
         }
     }, [])
 
@@ -117,7 +127,7 @@ const MenuScreen = () => {
                             loop
                             width={width}
                             height={410}
-                            data={Object.entries(currentMenu)} // Pass the current menu entries
+                            data={currentMenu} // Pass the reordered menu
                             mode="parallax"
                             parallaxScrollingScale={0.9}
                             parallaxScrollingOffset={20}
