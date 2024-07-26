@@ -17,22 +17,25 @@ import HomeScreen from './screens/HomeScreen'
 import MenuScreen from './screens/MenuScreen'
 import OrderInScreen from './screens/OrderInScreen'
 import tailwind from 'twrnc'
+import { CountProvider } from './context/CountContext' // Import the CountProvider
 
 const Tab = createBottomTabNavigator()
 const Stack = createNativeStackNavigator()
 
 export default function App() {
     return (
-        <NavigationContainer>
-            <Stack.Navigator
-                screenOptions={{
-                    contentStyle: { backgroundColor: 'white' },
-                    headerShown: false,
-                }}
-            >
-                <Stack.Screen name="Main" component={HomeTabs} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <CountProvider>
+            <NavigationContainer>
+                <Stack.Navigator
+                    screenOptions={{
+                        contentStyle: { backgroundColor: 'white' },
+                        headerShown: false,
+                    }}
+                >
+                    <Stack.Screen name="Main" component={HomeTabs} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </CountProvider>
     )
 }
 
