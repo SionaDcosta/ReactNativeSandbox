@@ -1,14 +1,8 @@
-import {
-    View,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-    TouchableWithoutFeedback,
-} from 'react-native'
+import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import React, { useState } from 'react'
 import { useCount } from '../context/CountContext' // Import the useCount hook
 import { LinearGradient } from 'expo-linear-gradient' // Import LinearGradient from Expo
-import { MaterialIcons } from '@expo/vector-icons' // Import MaterialIcons from Expo
+import LottieView from 'lottie-react-native' // Import LottieView from lottie-react-native
 
 const HomeScreen = () => {
     const { vegCount, setVegCount, nonVegCount, setNonVegCount } = useCount()
@@ -32,7 +26,7 @@ const HomeScreen = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>HomeScreen</Text>
+            <Text style={styles.title}>Add your count here...</Text>
 
             <View style={styles.buttonContainer}>
                 <TouchableWithoutFeedback onPress={handleAddVeg}>
@@ -44,18 +38,21 @@ const HomeScreen = () => {
                         ]}
                     >
                         <LinearGradient
-                            colors={['#f7b733', '#fc4a1a']} // Gradient colors
+                            colors={['#f7b733', '#b37c0c']} // Gradient colors
                             style={styles.gradient}
                         >
                             <View style={styles.buttonContent}>
-                                <Text style={styles.buttonText}>Add Veg</Text>
-                                {activeCounter === 'veg' && (
-                                    <MaterialIcons
-                                        name="check"
-                                        size={24}
-                                        color="#fff"
-                                        style={styles.checkIcon}
+                                {activeCounter === 'veg' ? (
+                                    <LottieView
+                                        source={require('../assets/AnimationTick.json')} // Path to your Lottie animation
+                                        autoPlay
+                                        loop={false}
+                                        style={styles.lottieAnimation}
                                     />
+                                ) : (
+                                    <Text style={styles.buttonText}>
+                                        Add Veg
+                                    </Text>
                                 )}
                             </View>
                         </LinearGradient>
@@ -70,20 +67,21 @@ const HomeScreen = () => {
                         ]}
                     >
                         <LinearGradient
-                            colors={['#f7b733', '#fc4a1a']} // Gradient colors
+                            colors={['#f7b733', '#b37c0c']} // Gradient colors
                             style={styles.gradient}
                         >
                             <View style={styles.buttonContent}>
-                                <Text style={styles.buttonText}>
-                                    Add Non-Veg
-                                </Text>
-                                {activeCounter === 'nonVeg' && (
-                                    <MaterialIcons
-                                        name="check"
-                                        size={24}
-                                        color="#fff"
-                                        style={styles.checkIcon}
+                                {activeCounter === 'nonVeg' ? (
+                                    <LottieView
+                                        source={require('../assets/AnimationTick.json')} // Path to your Lottie animation
+                                        autoPlay
+                                        loop={false}
+                                        style={styles.lottieAnimation}
                                     />
+                                ) : (
+                                    <Text style={styles.buttonText}>
+                                        Add Non-Veg
+                                    </Text>
                                 )}
                             </View>
                         </LinearGradient>
@@ -152,8 +150,9 @@ const styles = StyleSheet.create({
     buttonActive: {
         opacity: 0.5, // Reduce opacity to indicate the button is active
     },
-    checkIcon: {
-        marginLeft: 10, // Space between text and checkmark
+    lottieAnimation: {
+        width: 100,
+        height: 100,
     },
 })
 

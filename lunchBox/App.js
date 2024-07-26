@@ -48,8 +48,10 @@ function HomeTabs() {
                 tabBarIcon: ({ focused, color, size }) =>
                     menuIcons(route, focused),
                 tabBarStyle: {
-                    marginBottom: 20,
-                    borderRadius: 50,
+                    // marginBottom: 20,
+                    // borderRadius: 50,
+                    borderTopLeftRadius: 80,
+                    borderTopRightRadius: 80,
                     backgroundColor: '#d99f18',
                     height: 80,
                 },
