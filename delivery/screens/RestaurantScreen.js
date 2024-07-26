@@ -18,7 +18,6 @@ import { setRestaurant } from '../features/restaurantSlice'
 const RestaurantScreen = () => {
     const navigation = useNavigation()
     const dispatch = useDispatch()
-
     const {
         params: {
             id,
@@ -49,13 +48,25 @@ const RestaurantScreen = () => {
                 lat,
             })
         )
-    }, [])
+    }, [
+        dispatch,
+        id,
+        imgUrl,
+        title,
+        rating,
+        genre,
+        address,
+        short_description,
+        dishes,
+        long,
+        lat,
+    ])
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerShown: false,
         })
-    }, [])
+    }, [navigation])
 
     return (
         <>
@@ -92,7 +103,6 @@ const RestaurantScreen = () => {
                                     . {short_description}
                                 </Text>
                             </View>
-
                             <View style={tailwind`flex-row items-center`}>
                                 <MapPinIcon
                                     color="gray"
@@ -123,11 +133,7 @@ const RestaurantScreen = () => {
                     </TouchableOpacity>
                 </View>
 
-                <View style={tailwind`pb-27`}>
-                    <Text style={tailwind`px-4 pt-6 mb-3 font-bold text-xl`}>
-                        Menu
-                    </Text>
-                    {/* DishRows */}
+                <View style={tailwind`pb-32`}>
                     {dishes.map((dish) => (
                         <DishRow
                             key={dish._id}
@@ -136,6 +142,7 @@ const RestaurantScreen = () => {
                             description={dish.short_description}
                             price={dish.price}
                             image={dish.image}
+                            restaurantId={id} // Pass restaurantId to DishRow
                         />
                     ))}
                 </View>

@@ -2,45 +2,50 @@ import React from 'react'
 import {
     ImageBackground,
     Dimensions,
-    Image,
     StyleSheet,
     Text,
     View,
     ScrollView,
     TouchableOpacity,
 } from 'react-native'
-import {
-    ArrowLeftIcon,
-    ArrowRightStartOnRectangleIcon,
-} from 'react-native-heroicons/outline'
+import { ArrowLeftIcon } from 'react-native-heroicons/outline'
 import tailwind from 'twrnc'
+import { useDispatch } from 'react-redux'
+import { setAuthenticated, saveAuthState } from '../features/authSlice'
 
 const w = Dimensions.get('window').width
 const h = Dimensions.get('window').height
+
 const ProfileScreen = ({ navigation }) => {
+    const dispatch = useDispatch()
+
+    const handleSignOut = () => {
+        dispatch(setAuthenticated(false))
+        dispatch(saveAuthState(false))
+        // navigation.reset({
+        //     index: 0,
+        //     routes: [{ name: 'Auth' }],
+        // })
+        // navigation.navigate('App')
+        console.log('Navigation reset to Auth stack')
+    }
+
     return (
-        <ScrollView
-            style={{
-                backgroundColor: '#FFF',
-            }}
-        >
+        <ScrollView style={{ backgroundColor: '#FFF' }}>
             <ImageBackground
                 source={require('../assets/unsplash.jpg')}
-                style={{
-                    height: 0.6 * h,
-                }}
+                style={{ height: 0.6 * h }}
             >
                 <View
                     style={{
                         flexDirection: 'row',
                         justifyContent: 'space-between',
                         paddingHorizontal: 20,
-
                         alignItems: 'center',
                     }}
                 >
                     <TouchableOpacity
-                        onPress={navigation.goBack}
+                        onPress={() => navigation.goBack()}
                         style={tailwind`absolute top-14 left-5 p-2 bg-gray-100 rounded-full `}
                     >
                         <ArrowLeftIcon size={20} color="#00CCBB" />
@@ -61,7 +66,7 @@ const ProfileScreen = ({ navigation }) => {
                     style={{
                         color: '#000',
                         fontSize: 18,
-                        fontFamily: 'Montserrat_600SemiBold',
+
                         marginTop: 30,
                     }}
                 >
@@ -71,7 +76,7 @@ const ProfileScreen = ({ navigation }) => {
                     style={{
                         color: '#000',
                         fontSize: 18,
-                        fontFamily: 'Montserrat_600SemiBold',
+
                         marginTop: 30,
                     }}
                 >
@@ -81,7 +86,7 @@ const ProfileScreen = ({ navigation }) => {
                     style={{
                         color: '#000',
                         fontSize: 18,
-                        fontFamily: 'Montserrat_600SemiBold',
+
                         marginTop: 30,
                     }}
                 >
@@ -91,12 +96,24 @@ const ProfileScreen = ({ navigation }) => {
                     style={{
                         color: '#000',
                         fontSize: 18,
-                        fontFamily: 'Montserrat_600SemiBold',
+
                         marginTop: 30,
                     }}
                 >
                     Settings
                 </Text>
+                <TouchableOpacity onPress={handleSignOut}>
+                    <Text
+                        style={{
+                            color: '#000',
+                            fontSize: 18,
+
+                            marginTop: 30,
+                        }}
+                    >
+                        Signout
+                    </Text>
+                </TouchableOpacity>
             </View>
         </ScrollView>
     )

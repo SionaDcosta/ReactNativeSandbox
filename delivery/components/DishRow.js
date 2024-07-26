@@ -1,21 +1,62 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TouchableOpacity, Image, Alert } from 'react-native'
 import React, { useState } from 'react'
 import tailwind from 'twrnc'
 import currencyFormatter from 'currency-formatter'
 import { urlFor } from '../sanity'
 import { MinusCircleIcon, PlusCircleIcon } from 'react-native-heroicons/outline'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToBasket, removeFromBasket } from '../features/basketSlice'
-import { getBasketItemsWithId } from '../selector/selectors'
+import {
+    addToBasket,
+    removeFromBasket,
+    clearBasket,
+    selectRestaurantId,
+    selectBasketItemsWithId,
+} from '../features/basketSlice'
+// import { selectBasketItemsWithId } from '../selector/selectors'
 
-const DishRow = ({ id, name, description, price, image }) => {
+const DishRow = ({ id, name, description, price, image, restaurantId }) => {
     const [isPressed, setIsPressed] = useState(false)
-
-    const items = useSelector((state) => getBasketItemsWithId(state, id))
+    const items = useSelector((state) => selectBasketItemsWithId(state, id))
+    const currentRestaurantId = useSelector(selectRestaurantId)
     const dispatch = useDispatch()
 
     const addItemToBasket = () => {
-        dispatch(addToBasket({ id, name, description, price, image }))
+        if (currentRestaurantId && currentRestaurantId !== restaurantId) {
+            Alert.alert(
+                'Replace Items in Cart?',
+                'Your cart contains items from a different restaurant. Do you want to replace them with items from this restaurant?',
+                [
+                    { text: 'Cancel', style: 'cancel' },
+                    {
+                        text: 'Yes',
+                        onPress: () => {
+                            dispatch(clearBasket())
+                            dispatch(
+                                addToBasket({
+                                    id,
+                                    name,
+                                    description,
+                                    price,
+                                    image,
+                                    restaurantId,
+                                })
+                            )
+                        },
+                    },
+                ]
+            )
+        } else {
+            dispatch(
+                addToBasket({
+                    id,
+                    name,
+                    description,
+                    price,
+                    image,
+                    restaurantId,
+                })
+            )
+        }
     }
 
     const removeItemFromBasket = () => {

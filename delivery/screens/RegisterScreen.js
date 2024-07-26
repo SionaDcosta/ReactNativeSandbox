@@ -19,6 +19,7 @@ const RegisterScreen = ({ navigation }) => {
     })
 
     const handleRegister = async (values) => {
+        console.log('Helloooo1')
         try {
             const response = await axios.post(
                 'http://192.168.107.94:5000/register',
@@ -27,6 +28,7 @@ const RegisterScreen = ({ navigation }) => {
             console.log(response.data)
             navigation.navigate('Login')
         } catch (error) {
+            console.log('Helloooo')
             console.error(error.response.data)
         }
     }
