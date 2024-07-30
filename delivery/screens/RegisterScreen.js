@@ -32,7 +32,7 @@ const RegisterScreen = ({ navigation }) => {
     const handleRegister = async (values) => {
         try {
             const response = await axios.post(
-                'http://10.0.2.2:5000/register',
+                'http://10.0.2.2:5000/register', //192.168.107.94
                 values
             )
             console.log(response.data)

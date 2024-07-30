@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+//A thunk is a function that wraps another function to delay its execution.
+
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 // Load authentication state and username from AsyncStorage
