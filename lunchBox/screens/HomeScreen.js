@@ -1,12 +1,12 @@
 import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import React, { useState } from 'react'
-import { useCount } from '../context/CountContext' // Import the useCount hook
-import { LinearGradient } from 'expo-linear-gradient' // Import LinearGradient from Expo
-import LottieView from 'lottie-react-native' // Import LottieView from lottie-react-native
+import { useCount } from '../context/CountContext'
+import { LinearGradient } from 'expo-linear-gradient'
+import LottieView from 'lottie-react-native'
 
 const HomeScreen = () => {
     const { vegCount, setVegCount, nonVegCount, setNonVegCount } = useCount()
-    const [activeCounter, setActiveCounter] = useState(null) // Track which counter is active
+    const [activeCounter, setActiveCounter] = useState(null)
 
     const handleAddVeg = () => {
         if (activeCounter === null) {
@@ -33,18 +33,18 @@ const HomeScreen = () => {
                     <View
                         style={[
                             styles.button,
-                            activeCounter === 'nonVeg' && styles.buttonDisabled,
+                            activeCounter === 'nonVeg' && styles.buttonDisabled, //if LHS is true, && will return RHS. if LHS is false, && will short-circuit and return false without evaluating the RHS.
                             activeCounter === 'veg' && styles.buttonActive,
                         ]}
                     >
                         <LinearGradient
-                            colors={['#f7b733', '#b37c0c']} // Gradient colors
+                            colors={['#f7b733', '#b37c0c']}
                             style={styles.gradient}
                         >
                             <View style={styles.buttonContent}>
                                 {activeCounter === 'veg' ? (
                                     <LottieView
-                                        source={require('../assets/AnimationTick.json')} // Path to your Lottie animation
+                                        source={require('../assets/AnimationTick.json')}
                                         autoPlay
                                         loop={false}
                                         style={styles.lottieAnimation}
@@ -67,13 +67,13 @@ const HomeScreen = () => {
                         ]}
                     >
                         <LinearGradient
-                            colors={['#f7b733', '#b37c0c']} // Gradient colors
+                            colors={['#f7b733', '#b37c0c']}
                             style={styles.gradient}
                         >
                             <View style={styles.buttonContent}>
                                 {activeCounter === 'nonVeg' ? (
                                     <LottieView
-                                        source={require('../assets/AnimationTick.json')} // Path to your Lottie animation
+                                        source={require('../assets/AnimationTick.json')}
                                         autoPlay
                                         loop={false}
                                         style={styles.lottieAnimation}
@@ -106,22 +106,22 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-between', // Space buttons evenly
+        justifyContent: 'space-between',
         width: '100%',
-        maxWidth: 400, // Limit button container width
+        maxWidth: 400,
         height: 150,
     },
     button: {
         borderRadius: 8,
-        marginHorizontal: 8, // Space between buttons
-        width: '45%', // Adjust button width to fit side by side
-        alignItems: 'center', // Center items horizontally
-        justifyContent: 'center', // Center items vertically
-        elevation: 5, // Shadow for Android
-        shadowColor: '#000', // Shadow color for iOS
-        shadowOffset: { width: 0, height: 4 }, // Shadow offset
-        shadowOpacity: 0.1, // Shadow opacity
-        shadowRadius: 8, // Shadow radius
+        marginHorizontal: 8,
+        width: '45%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        elevation: 5,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.1,
+        shadowRadius: 8,
     },
     gradient: {
         paddingVertical: 12,
@@ -143,12 +143,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     buttonDisabled: {
-        backgroundColor: '#b0bec5', // Gray color for disabled state
+        backgroundColor: '#b0bec5',
         elevation: 0,
         shadowOpacity: 0,
     },
     buttonActive: {
-        opacity: 0.5, // Reduce opacity to indicate the button is active
+        opacity: 0.5,
     },
     lottieAnimation: {
         width: 100,

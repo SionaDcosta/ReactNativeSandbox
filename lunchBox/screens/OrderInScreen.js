@@ -14,7 +14,7 @@ const OrderInScreen = () => {
             <View style={styles.buttonContainer}>
                 <View style={styles.button}>
                     <LinearGradient
-                        colors={['#f7b733', '#b37c0c']} // Gradient colors
+                        colors={['#f7b733', '#b37c0c']}
                         style={styles.gradient}
                     >
                         <View style={styles.buttonContent}>
@@ -26,7 +26,7 @@ const OrderInScreen = () => {
                 </View>
                 <View style={styles.button}>
                     <LinearGradient
-                        colors={['#f7b733', '#b37c0c']} // Gradient colors
+                        colors={['#f7b733', '#b37c0c']}
                         style={styles.gradient}
                     >
                         <View style={styles.buttonContent}>

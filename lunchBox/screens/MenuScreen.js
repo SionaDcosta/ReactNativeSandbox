@@ -26,10 +26,10 @@ import MenuCard from '../components/MenuCard'
 const getWeekOfMonth = (date) => {
     const startWeekDayIndex = 1 // Set the start of the week to Monday (0 for Sunday, 1 for Monday, etc.)
     const firstDate = new Date(date.getFullYear(), date.getMonth(), 1)
-    const firstDay = firstDate.getDay()
-    const firstDayOffset = (firstDay - startWeekDayIndex + 7) % 7
-    const currentDate = date.getDate()
-    return Math.ceil((currentDate + firstDayOffset) / 7)
+    const firstDay = firstDate.getDay() //returns 0 to 6
+    const firstDayOffset = (firstDay - startWeekDayIndex + 7) % 7 //to check from 0 to 6 where the day falls
+    const currentDate = date.getDate() //// Output: 27 (since the date is July 27, 2024)
+    return Math.ceil((currentDate + firstDayOffset) / 7) // Output: Math.ceil((27 + 0) / 7) -> Math.ceil(27 / 7) -> 4
 }
 
 const MenuScreen = () => {
@@ -39,9 +39,10 @@ const MenuScreen = () => {
     const width = Dimensions.get('window').width
 
     useEffect(() => {
-        const today = new Date()
+        const today = new Date() // Output: 2024-07-27T10:30:00.000Z
         const weekOfMonth = getWeekOfMonth(today)
         const dayOfWeek = today.toLocaleString('default', { weekday: 'long' }) // Get the current day name
+        //today.toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' }) O/P: "Saturday, July 27, 2024"
 
         // Get the menu for the current week
         const currentWeekMenu = MenuItems.find(

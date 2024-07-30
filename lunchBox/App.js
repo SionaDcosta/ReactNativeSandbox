@@ -43,6 +43,7 @@ function HomeTabs() {
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
+                //here youre receiving the route that react navigation gives you
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarIcon: ({ focused, color, size }) =>
