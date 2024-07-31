@@ -5,6 +5,7 @@ import { selectIsAuthenticated, loadAuthState } from '../features/authSlice'
 import AppStack from './AppStack'
 import AuthStack from './AuthStack'
 import LandingScreen from '../screens/LandingScreen'
+import TabStack from './TabStack'
 
 const Stack = createNativeStackNavigator()
 
@@ -35,7 +36,7 @@ const AppNavigator = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             {isAuthenticated ? (
-                <Stack.Screen name="App" component={AppStack} />
+                <Stack.Screen name="Tab" component={TabStack} />
             ) : (
                 <Stack.Screen name="Auth" component={AuthStack} />
             )}
